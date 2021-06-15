@@ -1,0 +1,9 @@
+.link-active {
+  font-weight: bolder;
+  max-height: 70px;
+}
+
+.navbar {
+  z-index: 9999999;
+  box-shadow: 0px 0px 10px 0px #00000052;
+}

@@ -1,0 +1,19 @@
+.bg-table {
+  background-color: transparent;
+  flex-flow: row;
+  overflow-x: scroll;
+}
+
+app-task-list {
+  margin: 0px !important;
+  padding: 0px !important;
+  width: auto !important;
+}
+
+/* SCROLL BAR SETTINGS */
+
+.bg-table::-webkit-scrollbar {
+  display: none;
+}
+
+

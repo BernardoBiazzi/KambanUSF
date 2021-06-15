@@ -1,0 +1,39 @@
+.taskList {
+  background-color: white;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  height: fit-content;
+  box-shadow: 0px 0px 10px 0px #0000004f;
+  width: 320px;
+  max-width: 90%;
+}
+
+.appTaskContainer {
+  max-height: 60vh;
+  padding-right: 2px;
+  padding-left: 2px;
+  padding-bottom: 2px;
+  overflow-y: scroll;
+}
+
+/* SCROLL BAR SETTINGS */
+
+.appTaskContainer::-webkit-scrollbar {
+  width: 4px;
+}
+
+.appTaskContainer::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.appTaskContainer::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.226);
+  border-radius: 30px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  -ms-border-radius: 30px;
+  -o-border-radius: 30px;
+}
