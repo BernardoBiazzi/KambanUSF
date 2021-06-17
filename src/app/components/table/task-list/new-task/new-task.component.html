@@ -6,12 +6,14 @@
 <div class="row bgNewTask" *ngIf="isAdding">
   <form>
     <div class="form-group mt-2">
-      <input [(ngModel)]="newTask" [ngModelOptions]="{standalone: true}" class="form-control" aria-describedby="emailHelp" placeholder="Task Name">
+      <input [(ngModel)]="newTask" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Task Name">
     </div>
     <div class="form-group mt-2">
-      <input [(ngModel)]="newTaskDescription" [ngModelOptions]="{standalone: true}" class="form-control" aria-describedby="emailHelp" placeholder="Task Description">
+      <input [(ngModel)]="newTaskDescription" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Task Description">
     </div>
-    <button (click)="addNewTask()" class="btn btn-primary my-2 me-2 py-1 px-2">Adicionar</button>
-    <button (click)="setIsAdding()" class="btn btn-secondary my-2 py-1 px-2">Cancelar</button>
+    <div class="formBtns">
+      <button (click)="addNewTask()" class="btn btn-primary my-2 py-1">Adicionar</button>
+      <button (click)="setIsAdding()" class="btn btn-secondary my-2 py-1">Cancelar</button>
+    </div>
   </form>
 </div>

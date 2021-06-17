@@ -33,25 +33,31 @@ export class KambanApiService {
     return this.Tasks.filter((task) => task.status == status);
   }
 
-  addNewTask(task: any) {
-    this.httpClient.post('https://kanbusf.herokuapp.com/api/user/task/', task).toPromise().then((taskAdded) => this.pushNewTaskLocal(taskAdded));
+  addNewTask(newTask: any) {
+    this.httpClient.post('https://kanbusf.herokuapp.com/api/user/task/', newTask).toPromise().then((taskAdded) => this.pushNewTaskLocal(taskAdded));
   }
 
-  editTask(task: Task): Promise<any>{
-    return this.httpClient.put('https://kanbusf.herokuapp.com/api/user/task/', task).toPromise();
+  editTask(taskToEdit: Task) {
+    this.httpClient.put('https://kanbusf.herokuapp.com/api/user/task/', taskToEdit).toPromise().then((taskEdited) => this.editTaskLocal(taskEdited));
   }
 
-  deleteTask(task: Task) {
-    this.httpClient.delete('https://kanbusf.herokuapp.com/api/user/task/' + task.taskId).toPromise().then(() => this.deleteTaskLocal(task));
+  deleteTask(taskToDelete: Task) {
+    this.httpClient.delete('https://kanbusf.herokuapp.com/api/user/task/' + taskToDelete.taskId).toPromise().then(() => this.deleteTaskLocal(taskToDelete));
   }
 
-  pushNewTaskLocal(newTask: any) {
-    this.Tasks.push(newTask);
+  pushNewTaskLocal(taskAdded: any) {
+    this.Tasks.push(taskAdded);
     this.tasksChanges.emit();
   }
 
-  deleteTaskLocal(taskToDelete: any) {
-    this.Tasks = this.Tasks.filter((task) => task.taskId != taskToDelete.taskId );
+  editTaskLocal(taskEdited: any) {
+    this.Tasks.forEach((task) => {if (task.taskId == taskEdited.taskId) task = taskEdited});
+    console.log(this.Tasks)
+    this.tasksChanges.emit();
+  }
+
+  deleteTaskLocal(taskDeleted: any) {
+    this.Tasks = this.Tasks.filter((task) => task.taskId != taskDeleted.taskId );
     this.tasksChanges.emit();
   }
 

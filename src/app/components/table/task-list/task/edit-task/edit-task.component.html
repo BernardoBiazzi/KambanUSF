@@ -1,0 +1,14 @@
+<div class="row bgEditTask">
+  <form>
+    <div class="form-group mt-2">
+      <input [(ngModel)]="newTaskTitle" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Task Name">
+    </div>
+    <div class="form-group mt-2">
+      <input [(ngModel)]="newTaskDescription" [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Task Description">
+    </div>
+    <div class="formBtns">
+      <button (click)="editTask()" class="btn btn-primary my-2 py-1">Concluir</button>
+      <button (click)="setIsEditing()" class="btn btn-secondary my-2 py-1">Cancelar</button>
+    </div>
+  </form>
+</div>

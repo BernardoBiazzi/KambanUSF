@@ -12,6 +12,11 @@
   padding-top: 2px;
   padding-bottom: 2px;
   position: relative;
+  overflow: hidden;
+}
+
+.bgTask:hover {
+  background-color: rgb(243, 243, 243);
 }
 
 p {
@@ -19,26 +24,96 @@ p {
 }
 
 .title {
-  font-size: 20px;
+  font-size: 17px;
 }
 
 .descricao {
   color: gray;
 }
 
+.bgTask:hover .deleteTaskButton {
+  display: block;
+}
+
 .deleteTaskButton {
+  display: none;
   position: absolute;
   width: auto;
-  right: 9px;
+  right: 35px;
   transform: translateY(50%);
   bottom: 50%;
-  background-color: #d2d2d2;
-  box-shadow: inset 0px 0px 4px 0px #0000003d;
-  color: white;
+  background-color: transparent;
+  padding: 0;
+  font-size: 22px;
+  color: #b6b6b6;;
   font-weight: bold;
   border: none;
-  border-radius: 50%;
-  padding-left: 8px;
-  padding-right: 8px;
 }
+
+.deleteTaskButton:hover {
+  color: #808080;;
+}
+
+.bgTask:hover .editTaskButton {
+  display: block;
+}
+
+.editTaskButton {
+  display: none;
+  position: absolute;
+  width: auto;
+  right: 65px;
+  transform: translateY(50%);
+  bottom: 50%;
+  background-color: transparent;
+  padding: 0;
+  font-size: 25px;
+  color: #b6b6b6;;
+  font-weight: bold;
+  border: none;
+}
+
+.editTaskButton:hover {
+  color: #808080;;
+}
+
+.bgTask:hover .updateTaskStatus {
+  display: block;
+}
+
+.updateTaskStatus {
+  display: none;
+  position: absolute;
+  right: 0px;
+  width: auto;
+  height: 100%;
+  transform: translateY(50%);
+  bottom: 50%;
+  background-color: transparent;
+  padding-right: 8px;
+  padding-left: 12px;
+  font-size: 25px;
+  color: white;
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgb(219, 219, 219) 100%);
+  font-weight: bold;
+  border: none;
+}
+
+.updateTaskStatus:hover {
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgb(194, 194, 194) 100%);
+}
+
+@media only screen and (max-width: 768px) {
+  .deleteTaskButton {
+    display: block;
+  }
+  .editTaskButton {
+    display: block;
+  }
+  .updateTaskStatus {
+    display: block;
+  }
+}
+
+
 

@@ -1,4 +1,4 @@
-.bgNewTask {
+.bgEditTask {
   background-color: rgb(230 230 230 / 50%);
   box-shadow: 0px 0px 2px 0px #0000004f;
   border-radius: 5px;
@@ -6,7 +6,7 @@
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
-  margin-top: 20px;
+  margin-top: 10px;
   margin-left: 0px;
   margin-right: 0px;
   padding-top: 2px;
@@ -27,29 +27,4 @@
 
 .btn-secondary {
   width: 49%;
-}
-
-.bgNewTask:hover {
-  background-color: rgb(230 230 230 / 100%);
-}
-
-p {
-  margin: 0px;
-}
-
-.newTaskButton {
-  border: none;
-  margin: 0px;
-  padding: 0px;
-  background-color: transparent;
-  width: 100%;
-}
-
-.newTask {
-  color: rgb(70, 70, 70);
-  font-weight: lighter;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  font-size: 20px;
-  text-align: center;
 }

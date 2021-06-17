@@ -1,7 +1,7 @@
 <div class="p-3 ms-4 taskList" [ngStyle]="{'border-top': this.borderTop}">
   <h4 class="mb-2">{{taskList.title}}</h4>
   <div class="appTaskContainer">
-    <app-task *ngFor="let task of taskList.tasks" [task]="task"></app-task>
+    <app-task class="task" *ngFor="let task of taskList.tasks" [task]="task"></app-task>
   </div>
   <app-new-task [status]="taskList.status"></app-new-task>
 </div>
