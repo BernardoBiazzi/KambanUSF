@@ -1,10 +1,11 @@
-<div class="row bgTask" *ngIf="!isEditing">
-  <p class="title">{{task.titulo}}</p>
-  <p class="descricao">{{task.descricao}}</p>
-  <button class="editTaskButton" (click)="setIsEditing()"><fa-icon [icon]="faPenSquare"></fa-icon></button>
-  <button class="deleteTaskButton" (click)="deleteThisTask()"><fa-icon [icon]="faTrashAlt"></fa-icon></button>
-  <button class="updateTaskStatus" (click)="deleteThisTask()"><fa-icon [icon]="faChevronRight"></fa-icon></button>
+<div cdkDrag [cdkDragData]="task" [cdkDragStartDelay]="100">
+  <div class="row bgTask" *ngIf="!isEditing">
+    <p class="title">{{task.titulo}}</p>
+    <p class="descricao">{{task.descricao}}</p>
+    <button class="editTaskButton" (click)="setIsEditing()"><fa-icon [icon]="faPenSquare"></fa-icon></button>
+    <button class="deleteTaskButton" (click)="deleteThisTask()"><fa-icon [icon]="faTrashAlt"></fa-icon></button>
+  </div>
+  <app-edit-task [task]="task" (isEditingEventEmitter)="setIsEditing()" *ngIf="isEditing"></app-edit-task>
 </div>
-<app-edit-task [task]="task" (isEditingEventEmitter)="setIsEditing()" *ngIf="isEditing"></app-edit-task>
 
 

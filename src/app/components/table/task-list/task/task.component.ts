@@ -31,6 +31,4 @@ export class TaskComponent implements OnInit {
     this.isEditing = !this.isEditing;
   }
 
-  updateThisTask() {}
-
 }

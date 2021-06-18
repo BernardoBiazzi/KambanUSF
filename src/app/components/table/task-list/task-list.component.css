@@ -5,10 +5,9 @@
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
-  height: fit-content;
   box-shadow: 0px 0px 10px 0px #0000004f;
-  width: 320px;
-  max-width: 90%;
+  width: 310px;
+  max-width: 92%;
 }
 
 .appTaskContainer {

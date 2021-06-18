@@ -12,6 +12,7 @@ import { NewTaskComponent } from './components/table/task-list/new-task/new-task
 import { TaskListComponent } from './components/table/task-list/task-list.component';
 import { EditTaskComponent } from './components/table/task-list/task/edit-task/edit-task.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { DragDropModule } from '@angular/cdk/drag-drop'
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    DragDropModule
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [],

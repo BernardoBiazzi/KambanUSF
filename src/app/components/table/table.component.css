@@ -2,6 +2,7 @@
   background-color: transparent;
   flex-flow: row;
   overflow-x: scroll;
+  height: -webkit-fill-available;
 }
 
 app-task-list {
@@ -15,5 +16,4 @@ app-task-list {
 .bg-table::-webkit-scrollbar {
   display: none;
 }
-
 

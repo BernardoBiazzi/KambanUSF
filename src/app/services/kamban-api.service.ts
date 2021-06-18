@@ -41,6 +41,10 @@ export class KambanApiService {
     this.httpClient.put('https://kanbusf.herokuapp.com/api/user/task/', taskToEdit).toPromise().then((taskEdited) => this.editTaskLocal(taskEdited));
   }
 
+  changeTaskStatus(taskToEdit: Task) {
+    this.httpClient.put('https://kanbusf.herokuapp.com/api/user/task/', taskToEdit).toPromise().catch(() => this.failStatusChange());
+  }
+
   deleteTask(taskToDelete: Task) {
     this.httpClient.delete('https://kanbusf.herokuapp.com/api/user/task/' + taskToDelete.taskId).toPromise().then(() => this.deleteTaskLocal(taskToDelete));
   }
@@ -52,12 +56,16 @@ export class KambanApiService {
 
   editTaskLocal(taskEdited: any) {
     this.Tasks.forEach((task) => {if (task.taskId == taskEdited.taskId) task = taskEdited});
-    console.log(this.Tasks)
     this.tasksChanges.emit();
   }
 
   deleteTaskLocal(taskDeleted: any) {
     this.Tasks = this.Tasks.filter((task) => task.taskId != taskDeleted.taskId );
+    this.tasksChanges.emit();
+  }
+
+  failStatusChange() {
+    alert('Falha ao alterar status da Task');
     this.tasksChanges.emit();
   }
 
