@@ -15,8 +15,8 @@ export class KambanApiService {
   requestTasksFromServer() {
 
     this.httpClient.get('https://kanbusf.herokuapp.com/api/user/task').toPromise()
-      .then((result: any) => {
-        this.Tasks = result;
+      .then((tasks: any) => {
+        this.Tasks = tasks;
         this.tasksChanges.emit();
       }).catch(() => alert('Falha ao buscar tasks do server'));
 
