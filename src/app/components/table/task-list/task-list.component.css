@@ -10,7 +10,7 @@
   max-width: 92%;
 }
 
-.appTaskContainer {
+.tasksContainer {
   max-height: 60vh;
   padding-right: 2px;
   padding-left: 2px;
@@ -20,15 +20,15 @@
 
 /* SCROLL BAR SETTINGS */
 
-.appTaskContainer::-webkit-scrollbar {
+.tasksContainer::-webkit-scrollbar {
   width: 4px;
 }
 
-.appTaskContainer::-webkit-scrollbar-track {
+.tasksContainer::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.appTaskContainer::-webkit-scrollbar-thumb {
+.tasksContainer::-webkit-scrollbar-thumb {
   background-color: rgba(0, 0, 0, 0.226);
   border-radius: 30px;
   -webkit-border-radius: 30px;

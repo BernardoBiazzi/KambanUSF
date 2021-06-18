@@ -1,4 +1,3 @@
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { TaskList } from 'src/app/models/taskList.model';
 import { KambanApiService } from '../../services/kamban-api.service';
@@ -14,48 +13,27 @@ export class TableComponent implements OnInit {
     {
       title: 'BACKLOG',
       borderColor: '#a1a1a1',
-      status: 'b',
-      tasks: []
+      status: 'b'
     },
     {
       title: 'TO DO',
       borderColor: '#ffd400',
-      status: 't',
-      tasks: []
+      status: 't'
     },
     {
       title: 'DOING',
       borderColor: '#00fff3',
-      status: 'd',
-      tasks: []
+      status: 'd'
     },
     {
       title: 'CLOSED',
       borderColor: '#3fff00',
-      status: 'c',
-      tasks: []
+      status: 'c'
     }
   ]
 
   constructor(private kambanApi: KambanApiService) { }
 
-  ngOnInit(): void {
-    this.getTasks();
-    this.subscribeToTasksChanges();
-  }
-
-  getTasks() {
-    this.kambanApi.getTasks().then(() => this.getFilteredTasks());
-  }
-
-  subscribeToTasksChanges() {
-    this.kambanApi.tasksChanges.subscribe(() => this.getFilteredTasks());
-  }
-
-  getFilteredTasks() {
-    this.taskLists.forEach((taskList) => {
-      taskList = Object.assign(taskList, {tasks: this.kambanApi.getFilteredTasks(taskList.status)})
-    });
-  }
+  ngOnInit(): void {  }
 
 }

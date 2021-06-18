@@ -1,8 +1,9 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
-import { TaskList } from 'src/app/models/taskList.model';
+import { TaskList } from '../../../models/taskList.model';
 import { EventEmitter } from '@angular/core';
 import { moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { KambanApiService } from '../../../services/kamban-api.service';
+import { Task } from 'src/app/models/task.model';
 
 @Component({
   selector: 'app-task-list',
@@ -14,12 +15,23 @@ export class TaskListComponent implements OnInit {
   @Input() taskList!: TaskList;
   @Output() onDropEvent: EventEmitter<any> = new EventEmitter();
 
-  borderTop: string = '';
+  tasks!: Task[];
+  borderTop!: string;
 
   constructor(private kambanApi: KambanApiService) { }
 
   ngOnInit() {
-    this.borderTop = `${this.taskList.borderColor} 7px solid`
+    this.borderTop = `${this.taskList.borderColor} 7px solid`;
+    this.kambanApi.requestTasksFromServer();
+    this.subscribeToTasksChanges();
+  }
+
+  subscribeToTasksChanges() {
+    this.kambanApi.tasksChanges.subscribe(() => this.getTasks());
+  }
+
+  getTasks() {
+    this.tasks = this.kambanApi.getTasksByTaskListStatus(this.taskList.status);
   }
 
   drop(event: any) {

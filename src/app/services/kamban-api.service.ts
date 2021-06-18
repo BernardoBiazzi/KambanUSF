@@ -12,24 +12,17 @@ export class KambanApiService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getTasks(): Promise<any> {
+  requestTasksFromServer() {
 
-    let promise = new Promise((resolve, reject) => {
+    this.httpClient.get('https://kanbusf.herokuapp.com/api/user/task').toPromise()
+      .then((result: any) => {
+        this.Tasks = result;
+        this.tasksChanges.emit();
+      }).catch(() => alert('Falha ao buscar tasks do server'));
 
-      this.httpClient.get('https://kanbusf.herokuapp.com/api/user/task').toPromise()
-        .then((result: any) => {
-          this.Tasks = result;
-          resolve('sucess');
-        }).catch((error) => {
-          reject(error);
-        });
-
-    })
-
-    return promise;
   }
 
-  getFilteredTasks(status: string) {
+  getTasksByTaskListStatus(status: string) {
     return this.Tasks.filter((task) => task.status == status);
   }
 
@@ -42,29 +35,33 @@ export class KambanApiService {
   }
 
   changeTaskStatus(taskToEdit: Task) {
-    this.httpClient.put('https://kanbusf.herokuapp.com/api/user/task/', taskToEdit).toPromise().catch(() => this.failStatusChange());
+    this.httpClient.put('https://kanbusf.herokuapp.com/api/user/task/', taskToEdit).toPromise().then((taskChanged) => this.sucessStatusChange(taskChanged)).catch(() => this.failStatusChange());
   }
 
   deleteTask(taskToDelete: Task) {
     this.httpClient.delete('https://kanbusf.herokuapp.com/api/user/task/' + taskToDelete.taskId).toPromise().then(() => this.deleteTaskLocal(taskToDelete));
   }
 
-  pushNewTaskLocal(taskAdded: any) {
+  private pushNewTaskLocal(taskAdded: any) {
     this.Tasks.push(taskAdded);
     this.tasksChanges.emit();
   }
 
-  editTaskLocal(taskEdited: any) {
+  private editTaskLocal(taskEdited: any) {
     this.Tasks.forEach((task) => {if (task.taskId == taskEdited.taskId) task = taskEdited});
     this.tasksChanges.emit();
   }
 
-  deleteTaskLocal(taskDeleted: any) {
+  private deleteTaskLocal(taskDeleted: any) {
     this.Tasks = this.Tasks.filter((task) => task.taskId != taskDeleted.taskId );
     this.tasksChanges.emit();
   }
 
-  failStatusChange() {
+  private sucessStatusChange(taskChanged: any) {
+    this.Tasks.forEach((task) => {if (task.taskId == taskChanged.taskId) task = taskChanged});
+  }
+
+  private failStatusChange() {
     alert('Falha ao alterar status da Task');
     this.tasksChanges.emit();
   }
