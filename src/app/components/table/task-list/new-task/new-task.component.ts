@@ -22,6 +22,8 @@ export class NewTaskComponent implements OnInit {
     this.newTask = '';
     this.newTaskDescription = '';
     this.isAdding = !this.isAdding;
+    //criar serviço drag&drop e emitir evento para bloquear
+    //usando o atributo [cdkDragDisabled]="isDraggable" nos cdkDrag
   }
 
   addNewTask() {

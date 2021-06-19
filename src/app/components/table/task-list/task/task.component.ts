@@ -29,6 +29,8 @@ export class TaskComponent implements OnInit {
 
   setIsEditing() {
     this.isEditing = !this.isEditing;
+    //criar serviço drag&drop e emitir evento para bloquear
+    //usando o atributo [cdkDragDisabled]="isDraggable" nos cdkDrag
   }
 
 }

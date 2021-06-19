@@ -1,3 +1,4 @@
+import { moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { TaskList } from 'src/app/models/taskList.model';
 import { KambanApiService } from '../../services/kamban-api.service';
@@ -35,5 +36,9 @@ export class TableComponent implements OnInit {
   constructor(private kambanApi: KambanApiService) { }
 
   ngOnInit(): void {  }
+
+  drop(event: any) {
+    moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+  }
 
 }

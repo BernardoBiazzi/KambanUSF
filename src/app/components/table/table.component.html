@@ -1,6 +1,9 @@
-<div cdkDropListGroup class="row pt-4 pb-4 bg-table mx-0 pe-4">
-  <app-task-list *ngFor="let taskList of taskLists" [taskList]="taskList"></app-task-list>
+<div class="mx-0 px-0" cdkDropList [cdkDropListData]="taskLists" (cdkDropListDropped)="drop($event)" cdkDropListOrientation="horizontal">
+  <div class="row pt-4 pb-4 bg-table mx-0 pe-4" cdkDropListGroup>
+    <app-task-list *ngFor="let taskList of taskLists" [taskList]="taskList" cdkDrag [cdkDragData]="taskList" [cdkDragStartDelay]="100"></app-task-list>
+  </div>
 </div>
+
 
 
 
