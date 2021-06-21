@@ -1,5 +1,6 @@
 export interface TaskList {
   title: string,
   borderColor: string,
-  status: string
+  status: string,
+  tasksOrder: string
 }

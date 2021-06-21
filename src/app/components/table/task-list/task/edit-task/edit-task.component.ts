@@ -31,7 +31,7 @@ export class EditTaskComponent implements OnInit {
     if (this.newTaskTitle != '' && this.newTaskDescription != '') {
 
       let task = Object.assign(this.task, { titulo: this.newTaskTitle, descricao: this.newTaskDescription});
-      this.kambanApi.editTask(task);
+      this.kambanApi.updateTask(task);
       this.setIsEditing();
 
     } else {

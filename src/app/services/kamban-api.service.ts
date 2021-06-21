@@ -1,6 +1,7 @@
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import { Task } from '../models/task.model'
 import { HttpClient } from '@angular/common/http'
+import { TaskList } from '../models/taskList.model';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,9 @@ export class KambanApiService {
   private Tasks: Task[] = [];
   @Output() tasksChanges: EventEmitter<any> = new EventEmitter();
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {
+    this.requestTasksFromServer();
+  }
 
   requestTasksFromServer() {
 
@@ -22,24 +25,33 @@ export class KambanApiService {
 
   }
 
-  getTasksByTaskListStatus(status: string) {
-    return this.Tasks.filter((task) => task.status == status);
+  getTasksByTaskList(taskList: TaskList) {
+    let tasks = this.Tasks.filter((task) => task.status == taskList.status);
+    return this.orderTasks(tasks, taskList.tasksOrder);
   }
 
   addNewTask(newTask: any) {
     this.httpClient.post('https://kanbusf.herokuapp.com/api/user/task/', newTask).toPromise().then((taskAdded) => this.pushNewTaskLocal(taskAdded));
   }
 
-  editTask(taskToEdit: Task) {
-    this.httpClient.put('https://kanbusf.herokuapp.com/api/user/task/', taskToEdit).toPromise().then((taskEdited) => this.editTaskLocal(taskEdited));
-  }
-
-  changeTaskStatus(taskToEdit: Task) {
-    this.httpClient.put('https://kanbusf.herokuapp.com/api/user/task/', taskToEdit).toPromise().then((taskChanged) => this.sucessStatusChange(taskChanged)).catch(() => this.failStatusChange());
+  updateTask(taskToUpdate: Task) {
+    this.httpClient.put('https://kanbusf.herokuapp.com/api/user/task/', taskToUpdate).toPromise().then((taskUpdated) => this.updateTaskLocal(taskUpdated)).catch(() => this.failToUpdateTask());
   }
 
   deleteTask(taskToDelete: Task) {
     this.httpClient.delete('https://kanbusf.herokuapp.com/api/user/task/' + taskToDelete.taskId).toPromise().then(() => this.deleteTaskLocal(taskToDelete));
+  }
+
+  private orderTasks(tasks: Task[], taskListOrder: string) {
+    let tasksOrder = taskListOrder.split(',');
+    let tasksOrdered: Task[] = [];
+
+    tasksOrder.forEach((taskId) => {
+      let task = tasks.find((task) => task.taskId.toString() == taskId)
+      if (task) tasksOrdered.push(task);
+    })
+
+    return Object.assign(tasks, tasksOrdered);
   }
 
   private pushNewTaskLocal(taskAdded: any) {
@@ -47,8 +59,8 @@ export class KambanApiService {
     this.tasksChanges.emit();
   }
 
-  private editTaskLocal(taskEdited: any) {
-    this.Tasks.forEach((task) => {if (task.taskId == taskEdited.taskId) task = taskEdited});
+  private updateTaskLocal(taskUpdated: any) {
+    this.Tasks.forEach((task) => {if (task.taskId == taskUpdated.taskId) task = taskUpdated});
     this.tasksChanges.emit();
   }
 
@@ -57,12 +69,8 @@ export class KambanApiService {
     this.tasksChanges.emit();
   }
 
-  private sucessStatusChange(taskChanged: any) {
-    this.Tasks.forEach((task) => {if (task.taskId == taskChanged.taskId) task = taskChanged});
-  }
-
-  private failStatusChange() {
-    alert('Falha ao alterar status da Task');
+  private failToUpdateTask() {
+    alert('Falha ao atualizar Task');
     this.tasksChanges.emit();
   }
 

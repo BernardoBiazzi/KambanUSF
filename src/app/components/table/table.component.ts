@@ -14,28 +14,32 @@ export class TableComponent implements OnInit {
     {
       title: 'BACKLOG',
       borderColor: '#a1a1a1',
-      status: 'b'
+      status: 'b',
+      tasksOrder: ''
     },
     {
       title: 'TO DO',
       borderColor: '#ffd400',
-      status: 't'
+      status: 't',
+      tasksOrder: ''
     },
     {
       title: 'DOING',
       borderColor: '#00fff3',
-      status: 'd'
+      status: 'd',
+      tasksOrder: ''
     },
     {
       title: 'CLOSED',
       borderColor: '#3fff00',
-      status: 'c'
+      status: 'c',
+      tasksOrder: ''
     }
   ]
 
-  constructor(private kambanApi: KambanApiService) { }
+  constructor() { }
 
-  ngOnInit(): void {  }
+  ngOnInit(): void { }
 
   drop(event: any) {
     moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
