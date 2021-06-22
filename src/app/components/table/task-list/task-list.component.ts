@@ -42,13 +42,6 @@ export class TaskListComponent implements OnInit {
     this.tasks = this.kambanApi.getTasksByTaskList(this.taskList);
   }
 
-  //update será na API quando houver endpoint
-  updateThisTaskListOrder() {
-    let taskOrder = '';
-    this.tasks.forEach((task: Task) => { taskOrder = taskOrder + `${task.taskId},`});
-    localStorage.setItem(`${this.taskList.status}:order`, taskOrder);
-  }
-
   drop(event: any) {
     if (event.previousContainer == event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -56,8 +49,8 @@ export class TaskListComponent implements OnInit {
     } else {
       transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
       this.changeTaskStatus(event.container.data[event.currentIndex], event.container.id)
-      this.updateOtherTaskListOrder(event.previousContainer.data, event.previousContainer.id);
-      this.updateOtherTaskListOrder(event.container.data, event.container.id);
+      this.updatePreviousTaskListOrder(event.previousContainer.data, event.previousContainer.id);
+      this.updateThisTaskListOrder();
     }
   }
 
@@ -67,7 +60,14 @@ export class TaskListComponent implements OnInit {
   }
 
   //update será na API quando houver endpoint
-  updateOtherTaskListOrder(tasks: any[], taskListStatus: string) {
+  updateThisTaskListOrder() {
+    let taskOrder = '';
+    this.tasks.forEach((task: Task) => { taskOrder = taskOrder + `${task.taskId},`});
+    localStorage.setItem(`${this.taskList.status}:order`, taskOrder);
+  }
+
+  //update será na API quando houver endpoint
+  updatePreviousTaskListOrder(tasks: any[], taskListStatus: string) {
     let taskOrder = '';
     tasks.forEach((task: Task) => { taskOrder = taskOrder + `${task.taskId},`});
     localStorage.setItem(`${taskListStatus}:order`, taskOrder);
