@@ -3,7 +3,6 @@ import { Task } from '../../../../models/task.model';
 import { KambanApiService } from '../../../../services/kamban-api.service';
 import { faPenSquare } from '@fortawesome/free-solid-svg-icons';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-task',
@@ -12,7 +11,6 @@ import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 })
 export class TaskComponent implements OnInit {
 
-  faChevronRight = faChevronRight;
   faPenSquare = faPenSquare;
   faTrashAlt = faTrashAlt;
 

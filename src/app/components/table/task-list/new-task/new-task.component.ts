@@ -1,5 +1,4 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { Task } from 'src/app/models/task.model';
 import { KambanApiService } from '../../../../services/kamban-api.service';
 
 @Component({

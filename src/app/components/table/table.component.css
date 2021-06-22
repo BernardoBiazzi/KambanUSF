@@ -1,8 +1,12 @@
 .bg-table {
+  height: 90%;
+}
+
+.table-area {
   background-color: transparent;
   flex-flow: row;
   overflow-x: scroll;
-  height: -webkit-fill-available;
+  height: 100%;
 }
 
 app-task-list {
@@ -13,7 +17,7 @@ app-task-list {
 
 /* SCROLL BAR SETTINGS */
 
-.bg-table::-webkit-scrollbar {
+.table-area::-webkit-scrollbar {
   display: none;
 }
 
