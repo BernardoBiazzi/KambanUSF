@@ -4,6 +4,7 @@ import { EventEmitter } from '@angular/core';
 import { moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { KambanApiService } from '../../../services/kamban-api.service';
 import { Task } from 'src/app/models/task.model';
+import { DragdropService } from '../../../services/dragdrop.service';
 
 @Component({
   selector: 'app-task-list',
@@ -13,16 +14,17 @@ import { Task } from 'src/app/models/task.model';
 export class TaskListComponent implements OnInit {
 
   @Input() taskList!: TaskList;
-  @Output() onDropEvent: EventEmitter<any> = new EventEmitter();
-
   tasks!: Task[];
   borderTop!: string;
+  isDraggable: boolean = true;
 
-  constructor(private kambanApi: KambanApiService) { }
+  constructor(private kambanApi: KambanApiService,
+    private dragdropService: DragdropService) { }
 
   ngOnInit() {
     this.borderTop = `${this.taskList.borderColor} 7px solid`;
     this.subscribeToTasksChanges();
+    this.subscribeToIsDraggable();
   }
 
   subscribeToTasksChanges() {
@@ -71,6 +73,12 @@ export class TaskListComponent implements OnInit {
     let taskOrder = '';
     tasks.forEach((task: Task) => { taskOrder = taskOrder + `${task.taskId},`});
     localStorage.setItem(`${taskListStatus}:order`, taskOrder);
+  }
+
+  subscribeToIsDraggable() {
+    this.dragdropService.isDraggable.subscribe(() => {
+      this.isDraggable = !this.isDraggable;
+    })
   }
 
 }

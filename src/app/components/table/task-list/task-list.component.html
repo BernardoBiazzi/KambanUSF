@@ -1,7 +1,8 @@
 <div class="p-3 ms-4 taskList" [ngStyle]="{'border-top': this.borderTop}">
   <h4 class="mb-2">{{taskList.title}}</h4>
   <div class="tasksContainer row" id="{{taskList.status}}" cdkDropList [cdkDropListData]="tasks" (cdkDropListDropped)="drop($event)">
-    <app-task *ngFor="let task of tasks" [task]="task" cdkDrag [cdkDragData]="task" [cdkDragStartDelay]="100"></app-task>
+    <app-task *ngFor="let task of tasks" [task]="task" cdkDrag
+    [cdkDragData]="task" [cdkDragStartDelay]="100" [cdkDragDisabled]="!isDraggable"></app-task>
   </div>
   <app-new-task [status]="taskList.status"></app-new-task>
 </div>

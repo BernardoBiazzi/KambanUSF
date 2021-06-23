@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { DragdropService } from 'src/app/services/dragdrop.service';
 import { KambanApiService } from '../../../../services/kamban-api.service';
 
 @Component({
@@ -13,7 +14,8 @@ export class NewTaskComponent implements OnInit {
   newTask: string = '';
   newTaskDescription: string = '';
 
-  constructor(private kambanApi: KambanApiService) { }
+  constructor(private kambanApi: KambanApiService,
+    private dragdropService: DragdropService) { }
 
   ngOnInit(): void {}
 
@@ -21,8 +23,7 @@ export class NewTaskComponent implements OnInit {
     this.newTask = '';
     this.newTaskDescription = '';
     this.isAdding = !this.isAdding;
-    //criar serviço drag&drop e emitir evento para bloquear
-    //usando o atributo [cdkDragDisabled]="isDraggable" nos cdkDrag
+    this.dragdropService.setIsDraggable();
   }
 
   addNewTask() {

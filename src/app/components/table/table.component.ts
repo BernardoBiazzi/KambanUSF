@@ -1,7 +1,7 @@
 import { moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { TaskList } from 'src/app/models/taskList.model';
-import { KambanApiService } from '../../services/kamban-api.service';
+import { DragdropService } from '../../services/dragdrop.service';
 
 @Component({
   selector: 'app-table',
@@ -9,6 +9,8 @@ import { KambanApiService } from '../../services/kamban-api.service';
   styleUrls: ['./table.component.css']
 })
 export class TableComponent implements OnInit {
+
+  isDraggable: boolean = true;
 
   taskLists: TaskList[] = [
     {
@@ -37,12 +39,20 @@ export class TableComponent implements OnInit {
     }
   ]
 
-  constructor() { }
+  constructor(private dragdropService: DragdropService) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.subscribeToIsDraggable();
+  }
 
   drop(event: any) {
     moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+  }
+
+  subscribeToIsDraggable() {
+    this.dragdropService.isDraggable.subscribe(() => {
+      this.isDraggable = !this.isDraggable;
+    })
   }
 
 }

@@ -3,6 +3,7 @@ import { Task } from '../../../../models/task.model';
 import { KambanApiService } from '../../../../services/kamban-api.service';
 import { faPenSquare } from '@fortawesome/free-solid-svg-icons';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { DragdropService } from '../../../../services/dragdrop.service';
 
 @Component({
   selector: 'app-task',
@@ -17,7 +18,8 @@ export class TaskComponent implements OnInit {
   @Input() task!: Task;
   isEditing: boolean = false;
 
-  constructor(private kambanApi: KambanApiService) { }
+  constructor(private kambanApi: KambanApiService,
+    private dragdropService: DragdropService) { }
 
   ngOnInit(): void {}
 
@@ -27,8 +29,7 @@ export class TaskComponent implements OnInit {
 
   setIsEditing() {
     this.isEditing = !this.isEditing;
-    //criar serviço drag&drop e emitir evento para bloquear
-    //usando o atributo [cdkDragDisabled]="isDraggable" nos cdkDrag
+    this.dragdropService.setIsDraggable();
   }
 
 }
