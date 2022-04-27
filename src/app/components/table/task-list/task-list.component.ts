@@ -1,10 +1,9 @@
-import { Component, Input, OnInit, Output } from '@angular/core';
-import { TaskList } from '../../../models/taskList.model';
-import { EventEmitter } from '@angular/core';
-import { moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { KambanApiService } from '../../../services/kamban-api.service';
 import { Task } from 'src/app/models/task.model';
+import { TaskList } from '../../../models/taskList.model';
 import { DragdropService } from '../../../services/dragdrop.service';
+import { KambanApiService } from '../../../services/kamban-api.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-task-list',
@@ -27,58 +26,70 @@ export class TaskListComponent implements OnInit {
     this.subscribeToIsDraggable();
   }
 
-  subscribeToTasksChanges() {
+  private subscribeToTasksChanges() {
     this.kambanApi.tasksChanges.subscribe(() => {
-      this.getThisTaskListOrder(); //não precisa quando vier da API
-      this.getThisTasks();
-      this.updateThisTaskListOrder();
+      this.getTaskListOrder(); //não precisa quando vier da API
+      this.getTasks();
+      this.updateTaskListOrder();
     });
   }
 
-  getThisTaskListOrder() {
-    let taskListOrder = localStorage.getItem(`${this.taskList.status}:order`);
+  private subscribeToIsDraggable() {
+    this.dragdropService.isDraggable.subscribe(() => {
+      this.isDraggable = !this.isDraggable;
+    })
+  }
+
+  private getTaskListOrder() {
+    const taskListOrder = localStorage.getItem(`${this.taskList.status}:order`);
     if(taskListOrder) this.taskList.tasksOrder = taskListOrder;
   }
 
-  getThisTasks() {
+  private getTasks() {
     this.tasks = this.kambanApi.getTasksByTaskList(this.taskList);
   }
 
   drop(event: any) {
+
     if (event.previousContainer == event.container) {
+
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-      this.updateThisTaskListOrder();
+      this.updateTaskListOrder();
+
     } else {
+
       transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
-      this.changeTaskStatus(event.container.data[event.currentIndex], event.container.id)
-      this.updatePreviousTaskListOrder(event.previousContainer.data, event.previousContainer.id);
-      this.updateThisTaskListOrder();
+      this.updateTaskListOrder();
+
+      const droppedTask: Task = event.container.data[event.currentIndex];
+      const newTaskStatus: string = event.container.id;
+      this.updateTaskStatus(droppedTask, newTaskStatus);
+
+      const previousTaskListTasks: Task[] = event.previousContainer.data;
+      const previousTaskListStatus: string = event.previousContainer.id;
+      this.updatePreviousTaskListOrder(previousTaskListTasks, previousTaskListStatus);
+
     }
+
   }
 
-  changeTaskStatus(task: Task, newStatus: string) {
+  private updateTaskStatus(task: Task, newStatus: string) {
     let updatedTask = Object.assign(task, { status: newStatus });
     this.kambanApi.updateTask(updatedTask);
   }
 
   //update será na API quando houver endpoint
-  updateThisTaskListOrder() {
+  private updateTaskListOrder() {
     let taskOrder = '';
     this.tasks.forEach((task: Task) => { taskOrder = taskOrder + `${task.taskId},`});
     localStorage.setItem(`${this.taskList.status}:order`, taskOrder);
   }
 
   //update será na API quando houver endpoint
-  updatePreviousTaskListOrder(tasks: any[], taskListStatus: string) {
+  private updatePreviousTaskListOrder(tasks: any[], taskListStatus: string) {
     let taskOrder = '';
     tasks.forEach((task: Task) => { taskOrder = taskOrder + `${task.taskId},`});
     localStorage.setItem(`${taskListStatus}:order`, taskOrder);
-  }
-
-  subscribeToIsDraggable() {
-    this.dragdropService.isDraggable.subscribe(() => {
-      this.isDraggable = !this.isDraggable;
-    })
   }
 
 }
