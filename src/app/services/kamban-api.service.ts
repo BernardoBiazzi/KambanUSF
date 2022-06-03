@@ -1,17 +1,26 @@
-import { Task } from '../models/task.model'
-import { HttpClient } from '@angular/common/http'
+import { Task } from '../models/task.model';
+import { HttpClient } from '@angular/common/http';
 import { TaskList } from '../models/taskList.model';
 import { EventEmitter, Injectable, Output } from '@angular/core';
+import { FakeApiService } from './fake-api.service';
 
 @Injectable({ providedIn: 'root' })
 export class KambanApiService {
 
   private Tasks: Task[] = [];
+  private useFakeApi: boolean = true;
   @Output() tasksChanges: EventEmitter<any> = new EventEmitter();
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient,
+    private fakeApiService: FakeApiService) { }
 
   requestTasksFromServer() {
+
+    this.Tasks = this.fakeApiService.getTasks();
+    setTimeout(() => { this.tasksChanges.emit(); }, 0);
+    if (this.useFakeApi) return;
+    // ----------------------------------------
+
     this.httpClient.get('https://kanbusf.herokuapp.com/api/user/task').toPromise()
       .then((tasks: any) => {
 
@@ -34,6 +43,14 @@ export class KambanApiService {
   // Add Task Methods ------------------------
 
   addNewTask(newTask: any) {
+
+    this.fakeApiService.addTask((newTask)).then((taskAdded) => {
+      this.pushNewTaskLocal(taskAdded);
+    });
+
+    if (this.useFakeApi) return;
+    // ----------------------------------------
+
     this.httpClient.post('https://kanbusf.herokuapp.com/api/user/task/', newTask).toPromise()
       .then((taskAdded: any) => this.pushNewTaskLocal(taskAdded))
       .catch((error: any) => this.failToAddTask(error));
@@ -53,6 +70,14 @@ export class KambanApiService {
   // Update Task Methods ------------------------
 
   updateTask(taskToUpdate: Task) {
+
+    this.fakeApiService.updateTask((taskToUpdate)).then((taskUpdated) => {
+      this.updateTaskLocal(taskUpdated);
+    });
+
+    if (this.useFakeApi) return;
+    // ----------------------------------------
+
     this.httpClient.put('https://kanbusf.herokuapp.com/api/user/task/', taskToUpdate).toPromise()
       .then((taskUpdated: any) => this.updateTaskLocal(taskUpdated))
       .catch((error: any) => this.failToUpdateTask(error));
@@ -72,6 +97,14 @@ export class KambanApiService {
   // Delete Task Methods ------------------------
 
   deleteTask(taskToDelete: Task) {
+
+    this.fakeApiService.deleteTask((taskToDelete)).then((taskDeleted) => {
+      this.deleteTaskLocal(taskDeleted);
+    });
+
+    if (this.useFakeApi) return;
+    // ----------------------------------------
+
     this.httpClient.delete('https://kanbusf.herokuapp.com/api/user/task/' + taskToDelete.taskId).toPromise()
       .then((taskDeleted: any) => this.deleteTaskLocal(taskDeleted))
       .catch((error: any) => this.failToDeleteTask(error));
