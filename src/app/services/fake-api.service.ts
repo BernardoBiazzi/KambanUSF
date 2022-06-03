@@ -26,8 +26,9 @@ export class FakeApiService {
 
   updateTask(taskToUpdate: Task): Promise<Task> {
     let tasks: Task[] = this.getTasks();
-    tasks.forEach((task: Task) => { if (task.taskId == taskToUpdate.taskId) task = taskToUpdate; });
-    localStorage.setItem('fakeTasks', JSON.stringify(tasks));
+    let newtasks = tasks.filter((task: Task) => task.taskId != taskToUpdate.taskId);
+    newtasks.push(taskToUpdate);
+    localStorage.setItem('fakeTasks', JSON.stringify(newtasks));
 
     return new Promise((resolve, reject) => {
       resolve(taskToUpdate);
@@ -36,7 +37,7 @@ export class FakeApiService {
 
   deleteTask(taskToDelete: Task): Promise<Task> {
     let tasks: Task[] = this.getTasks();
-    const newtasks = tasks.filter((task: Task) => { task.taskId != taskToDelete.taskId });
+    const newtasks = tasks.filter((task: Task) => task.taskId != taskToDelete.taskId);
     localStorage.setItem('fakeTasks', JSON.stringify(newtasks));
 
     return new Promise((resolve, reject) => {
