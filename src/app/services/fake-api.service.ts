@@ -1,58 +1,159 @@
 import { Injectable } from '@angular/core';
 import { Task } from '../models/task.model';
+import { TaskList } from '../models/taskList.model';
 
 @Injectable({ providedIn: 'root' })
 export class FakeApiService {
 
-  constructor() { }
+  constructor() {
 
-  getTasks(): Task[] {
-    const tasksStringify = localStorage.getItem('fakeTasks') || '{}';
-    const tasks: Task[] = JSON.parse(tasksStringify);
-    if (tasks.length > 0) return tasks;
+    let mock: TaskList[] = [
+      {
+        id: 1,
+        title: 'BACKLOG',
+        borderColor: '#a1a1a1',
+        tasks: []
+      },
+      {
+        id: 2,
+        title: 'TO DO',
+        borderColor: '#ffd400',
+        tasks: []
+      },
+      {
+        id: 3,
+        title: 'DOING',
+        borderColor: '#00fff3',
+        tasks: []
+      },
+      {
+        id: 4,
+        title: 'CLOSED',
+        borderColor: '#3fff00',
+        tasks: []
+      }
+    ]
+
+    if (this.getTaskLists().length == 0) localStorage.setItem('fakeTaskLists', JSON.stringify(mock));
+
+  }
+
+  getTaskLists(): TaskList[] {
+    const taskListsStringify = localStorage.getItem('fakeTaskLists') || '{}';
+    const taskLists: TaskList[] = JSON.parse(taskListsStringify);
+    if (taskLists.length > 0) return taskLists;
     else return [];
   }
 
-  addTask(taskToAdd: Task): Promise<Task> {
+  getTaskListById(taskListId: number): TaskList {
+    const taskList = this.getTaskLists().find((tasklist) => tasklist.id == taskListId);
+    if (taskList) return taskList;
+    else return {} as TaskList;
+  }
+
+  addTaskList(taskListToAdd: TaskList): Promise<TaskList> {
+    taskListToAdd.id = this.getNewTaskListId();
+    let taskLists: TaskList[] = this.getTaskLists();
+    taskLists.push(taskListToAdd);
+    localStorage.setItem('fakeTaskLists', JSON.stringify(taskLists));
+
+    return new Promise((resolve, reject) => {
+      resolve(taskListToAdd);
+    });
+  }
+
+  updateTaskList(taskListToUpdate: TaskList): Promise<TaskList> {
+    let taskLists: TaskList[] = this.getTaskLists();
+    let taskListIndex: number = 0;
+
+    let newTaskLists = taskLists.filter((taskList: TaskList, index: number) => {
+      if (taskList.id == taskListToUpdate.id) taskListIndex = index;
+      return taskList.id != taskListToUpdate.id
+    });
+
+    if (taskListIndex > 0) newTaskLists.splice(taskListIndex, 0, taskListToUpdate);
+    else newTaskLists.unshift(taskListToUpdate);
+    localStorage.setItem('fakeTaskLists', JSON.stringify(newTaskLists));
+
+    return new Promise((resolve, reject) => {
+      resolve(taskListToUpdate);
+    });
+  }
+
+  deleteTaskList(taskListToDelete: TaskList): Promise<TaskList> {
+    let taskLists: TaskList[] = this.getTaskLists();
+    const newTaskLists = taskLists.filter((taskList: TaskList) => taskList.id != taskListToDelete.id);
+    localStorage.setItem('fakeTaskLists', JSON.stringify(newTaskLists));
+
+    return new Promise((resolve, reject) => {
+      resolve(taskListToDelete);
+    });
+  }
+
+  getNewTaskListId(): number {
+    let taskLists: TaskList[] = this.getTaskLists();
+    if (!taskLists) return 0;
+
+    let max = 0;
+    taskLists.forEach((taskList: TaskList) => {
+      if (taskList.id > max) max = taskList.id;
+    });
+
+    return (max+1);
+  }
+
+  // --------------------------------
+
+  getTasks(taskListId: number): Task[] {
+    const taskList = this.getTaskLists().find((tasklist) => tasklist.id == taskListId);
+    if (taskList && taskList.tasks.length > 0) return taskList.tasks;
+    else return [];
+  }
+
+  addTask(taskToAdd: Task, taskListId: number): Promise<Task> {
     taskToAdd.taskId = this.getNewTaskId();
-    let tasks: Task[] = this.getTasks();
-    tasks.push(taskToAdd);
-    localStorage.setItem('fakeTasks', JSON.stringify(tasks));
+    let taskList = this.getTaskListById(taskListId);
+    if (taskList) taskList.tasks.push(taskToAdd);
+    else return Promise.resolve(taskToAdd);
 
     return new Promise((resolve, reject) => {
-      resolve(taskToAdd);
+      if (taskList) this.updateTaskList(taskList).then(() => resolve(taskToAdd));
     });
   }
 
-  updateTask(taskToUpdate: Task): Promise<Task> {
-    let tasks: Task[] = this.getTasks();
-    let newtasks = tasks.filter((task: Task) => task.taskId != taskToUpdate.taskId);
+  updateTask(taskToUpdate: Task, taskListId: number): Promise<Task> {
+    let tasks: Task[] = this.getTasks(taskListId);
+    let newtasks: Task[] = tasks.filter((task: Task) => task.taskId != taskToUpdate.taskId);
     newtasks.push(taskToUpdate);
-    localStorage.setItem('fakeTasks', JSON.stringify(newtasks));
+
+    let taskList = this.getTaskListById(taskListId);
+    if (taskList) taskList.tasks = newtasks
+    else return Promise.resolve(taskToUpdate);
 
     return new Promise((resolve, reject) => {
-      resolve(taskToUpdate);
+      if (taskList) this.updateTaskList(taskList).then(() => resolve(taskToUpdate));
     });
   }
 
-  deleteTask(taskToDelete: Task): Promise<Task> {
-    let tasks: Task[] = this.getTasks();
-    const newtasks = tasks.filter((task: Task) => task.taskId != taskToDelete.taskId);
-    localStorage.setItem('fakeTasks', JSON.stringify(newtasks));
+  deleteTask(taskToDelete: Task, taskListId: number): Promise<Task> {
+    let taskList = this.getTaskListById(taskListId);
+    const tasks = taskList ? taskList.tasks.filter((task: Task) => task.taskId != taskToDelete.taskId) : [];
+    if (taskList) taskList.tasks = tasks
+    else return Promise.resolve(taskToDelete);
 
     return new Promise((resolve, reject) => {
-      resolve(taskToDelete);
+      if (taskList) this.updateTaskList(taskList).then(() => resolve(taskToDelete));
     });
   }
 
   getNewTaskId(): number {
-    let tasks: Task[] = this.getTasks();
-    if (!tasks) return 0;
-
     let max = 0;
-    tasks.forEach((task: Task) => {
-      if (task.taskId > max) max = task.taskId;
-    });
+
+    this.getTaskLists().forEach((taskList) => {
+      taskList.tasks.forEach((task: Task) => {
+        if (task.taskId && task.taskId > max) max = task.taskId;
+      });
+    })
 
     return (max+1);
   }

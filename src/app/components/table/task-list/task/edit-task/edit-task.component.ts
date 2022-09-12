@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { KambanApiService } from '../../../../../services/kamban-api.service';
+import { TaskService } from '../../../../../services/task-service';
 import { Task } from '../../../../../models/task.model';
 
 @Component({
@@ -10,12 +10,13 @@ import { Task } from '../../../../../models/task.model';
 export class EditTaskComponent implements OnInit {
 
   @Input() task!: Task;
+  @Input() taskListId!: number;
   @Output() isEditingEventEmitter: EventEmitter<any> = new EventEmitter();
 
   newTaskTitle!: string ;
   newTaskDescription!: string;
 
-  constructor(private kambanApi: KambanApiService) { }
+  constructor(private taskService: TaskService) { }
 
   ngOnInit(): void {
     this.newTaskTitle = this.task.titulo;
@@ -31,7 +32,7 @@ export class EditTaskComponent implements OnInit {
     if (this.newTaskTitle != '' && this.newTaskDescription != '') {
 
       let task = Object.assign(this.task, { titulo: this.newTaskTitle, descricao: this.newTaskDescription});
-      this.kambanApi.updateTask(task);
+      this.taskService.updateTask(task, this.taskListId);
       this.setIsEditing();
 
     } else {

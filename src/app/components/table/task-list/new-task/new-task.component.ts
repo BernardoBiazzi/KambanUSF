@@ -1,6 +1,7 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Task } from 'src/app/models/task.model';
 import { DragdropService } from 'src/app/services/dragdrop.service';
-import { KambanApiService } from '../../../../services/kamban-api.service';
+import { TaskService } from '../../../../services/task-service';
 
 @Component({
   selector: 'app-new-task',
@@ -9,12 +10,12 @@ import { KambanApiService } from '../../../../services/kamban-api.service';
 })
 export class NewTaskComponent implements OnInit {
 
-  @Input() status!: string;
+  @Input() taskListId!: number;
   isAdding: boolean = false;
   newTask: string = '';
   newTaskDescription: string = '';
 
-  constructor(private kambanApi: KambanApiService,
+  constructor(private taskService: TaskService,
     private dragdropService: DragdropService) { }
 
   ngOnInit(): void {}
@@ -30,9 +31,10 @@ export class NewTaskComponent implements OnInit {
 
     if (this.newTask != '' && this.newTaskDescription != '') {
 
-      let task = { titulo: this.newTask, descricao: this.newTaskDescription, status: this.status }
+      let task: Task = { titulo: this.newTask, descricao: this.newTaskDescription }
       this.setIsAdding();
-      this.kambanApi.addNewTask(task);
+      console.log(task);
+      this.taskService.addNewTask(task, this.taskListId);
 
     } else {
 

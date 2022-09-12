@@ -2,12 +2,15 @@
 
   <h4 class="mb-2">{{taskList.title}}</h4>
 
-  <div class="tasksContainer row" id="{{taskList.status}}"
+  <div class="tasksContainer row" id="{{taskList.id}}"
     cdkDropList
-    [cdkDropListData]="tasks"
+    [cdkDropListData]="taskList.tasks"
     (cdkDropListDropped)="drop($event)">
 
-    <app-task *ngFor="let task of tasks" [task]="task"
+    <app-task
+      *ngFor="let task of taskList.tasks"
+      [taskListId]="taskList.id"
+      [task]="task"
       cdkDrag
       [cdkDragData]="task"
       [cdkDragStartDelay]="100"
@@ -16,6 +19,6 @@
 
   </div>
 
-  <app-new-task [status]="taskList.status"></app-new-task>
+  <app-new-task [taskListId]="taskList.id"></app-new-task>
 
 </div>

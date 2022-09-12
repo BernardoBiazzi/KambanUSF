@@ -1,11 +1,11 @@
 .bg-table {
-  height: 90%;
+  height: calc(100vh - 56px);
 }
 
 .table-area {
   background-color: transparent;
   flex-flow: row;
-  overflow-x: scroll;
+  overflow-x: auto;
   height: 100%;
 }
 
@@ -15,11 +15,35 @@ app-task-list {
   width: auto !important;
 }
 
+.add-tasklist {
+  width: 310px;
+  height: 180px;
+  background-color: white;
+  margin-left: 25px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  font-size: 20px;
+  font-weight: 600;
+  color: #585858;
+  opacity: 0.7;
+  cursor: pointer;
+}
+
+.add-tasklist:hover {
+  opacity: 1;
+}
+
 /* SCROLL BAR SETTINGS */
 
-.table-area::-webkit-scrollbar {
+/* .table-area::-webkit-scrollbar {
   display: none;
-}
+} */
 
 /* CDK DRAG&DROP ANIMATIONS */
 

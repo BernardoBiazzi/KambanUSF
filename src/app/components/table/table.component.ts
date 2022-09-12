@@ -1,7 +1,7 @@
 import { moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { TaskList } from 'src/app/models/taskList.model';
-import { KambanApiService } from 'src/app/services/kamban-api.service';
+import { TaskService } from 'src/app/services/task-service';
 import { DragdropService } from '../../services/dragdrop.service';
 
 @Component({
@@ -12,40 +12,15 @@ import { DragdropService } from '../../services/dragdrop.service';
 export class TableComponent implements OnInit {
 
   isDraggable: boolean = true;
-
-  taskLists: TaskList[] = [
-    {
-      title: 'BACKLOG',
-      borderColor: '#a1a1a1',
-      status: 'b',
-      tasksOrder: ''
-    },
-    {
-      title: 'TO DO',
-      borderColor: '#ffd400',
-      status: 't',
-      tasksOrder: ''
-    },
-    {
-      title: 'DOING',
-      borderColor: '#00fff3',
-      status: 'd',
-      tasksOrder: ''
-    },
-    {
-      title: 'CLOSED',
-      borderColor: '#3fff00',
-      status: 'c',
-      tasksOrder: ''
-    }
-  ]
+  taskLists: TaskList[] = [];
 
   constructor(private dragdropService: DragdropService,
-    private kambanApiService: KambanApiService) { }
+    private taskService: TaskService) { }
 
   ngOnInit(): void {
     this.subscribeToIsDraggable();
-    this.kambanApiService.requestTasksFromServer();
+    this.subscribeToTaskChanges();
+    this.taskLists = this.taskService.requestTaskLists();
   }
 
   drop(event: any) {
@@ -55,6 +30,12 @@ export class TableComponent implements OnInit {
   subscribeToIsDraggable() {
     this.dragdropService.isDraggable.subscribe(() => {
       this.isDraggable = !this.isDraggable;
+    })
+  }
+
+  subscribeToTaskChanges() {
+    this.taskService.tasksChanges.subscribe(() => {
+      this.taskLists = this.taskService.requestTaskLists();
     })
   }
 

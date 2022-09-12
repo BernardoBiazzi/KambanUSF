@@ -4,7 +4,7 @@
   <button class="editTaskButton" (click)="setIsEditing()"><fa-icon [icon]="faPenSquare"></fa-icon></button>
   <button class="deleteTaskButton" (click)="deleteThisTask()"><fa-icon [icon]="faTrashAlt"></fa-icon></button>
 </div>
-<app-edit-task [task]="task" (isEditingEventEmitter)="setIsEditing()" *ngIf="isEditing" [cdkDragDisabled]="true"></app-edit-task>
+<app-edit-task [task]="task" [taskListId]="taskListId" (isEditingEventEmitter)="setIsEditing()" *ngIf="isEditing" [cdkDragDisabled]="true"></app-edit-task>
 
 
 
