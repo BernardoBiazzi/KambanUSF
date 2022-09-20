@@ -24,7 +24,7 @@ export class AddTaskListComponent implements OnInit {
 
   taskListForm = new FormGroup({
     title: new FormControl(''),
-    borderColor: new FormControl(this.colors[6])
+    borderColor: new FormControl('')
   });
 
   showFloatingColorSelector = false;
@@ -33,6 +33,7 @@ export class AddTaskListComponent implements OnInit {
   constructor(private taskService: TaskService) { }
 
   ngOnInit(): void {
+    this.resetForm();
   }
 
   toggleForm() {
@@ -55,10 +56,7 @@ export class AddTaskListComponent implements OnInit {
   }
 
   resetForm() {
-    this.taskListForm.setValue({
-      title: 'Nova Lista de Tarefas',
-      borderColor: this.colors[6]
-    });
+    this.taskListForm.setValue({ title: '', borderColor: this.colors[6] });
   }
 
   toggleColorSelector() {

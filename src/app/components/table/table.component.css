@@ -3,7 +3,7 @@
 }
 
 .table-area {
-  background-color: transparent;
+  background-color: #233337;
   flex-flow: row;
   overflow-x: auto;
   height: 100%;
@@ -40,7 +40,7 @@ app-task-list {
 }
 
 .cdk-drag-placeholder {
-  visibility: hidden;
+  opacity: 0.4;
 }
 
 app-add-task-list {

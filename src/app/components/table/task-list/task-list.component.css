@@ -10,6 +10,12 @@
   max-width: 92%;
   cursor: pointer;
   position: relative;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .taskList:hover button {
@@ -20,8 +26,8 @@
   max-height: 60vh;
   padding-bottom: 10px;
   overflow-y: scroll;
-  min-height: 75px;
-  background: #4c4c4c;
+  min-height: 80.5px;
+  background: #233337;
   margin-right: 0px;
   margin-left: 0px;
   border-radius: 5px;
@@ -66,7 +72,7 @@
 }
 
 .cdk-drag-placeholder {
-  visibility: hidden;
+  opacity: 0.4;
 }
 
 button {
