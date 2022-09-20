@@ -9,14 +9,23 @@
   width: 310px;
   max-width: 92%;
   cursor: pointer;
+  position: relative;
+}
+
+.taskList:hover button {
+  display: block;
 }
 
 .tasksContainer {
   max-height: 60vh;
-  padding-right: 2px;
-  padding-left: 2px;
-  padding-bottom: 2px;
+  padding-bottom: 10px;
   overflow-y: scroll;
+  min-height: 75px;
+  background: #4c4c4c;
+  margin-right: 0px;
+  margin-left: 0px;
+  border-radius: 5px;
+  margin-top: 15px;
 }
 
 /* SCROLL BAR SETTINGS */
@@ -58,4 +67,19 @@
 
 .cdk-drag-placeholder {
   visibility: hidden;
+}
+
+button {
+  border: none;
+  background: transparent;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 22px;
+  color: lightgray;
+  display: none;
+}
+
+button:hover {
+  color: gray;
 }

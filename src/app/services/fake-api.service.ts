@@ -5,37 +5,10 @@ import { TaskList } from '../models/taskList.model';
 @Injectable({ providedIn: 'root' })
 export class FakeApiService {
 
-  constructor() {
+  constructor() { }
 
-    let mock: TaskList[] = [
-      {
-        id: 1,
-        title: 'BACKLOG',
-        borderColor: '#a1a1a1',
-        tasks: []
-      },
-      {
-        id: 2,
-        title: 'TO DO',
-        borderColor: '#ffd400',
-        tasks: []
-      },
-      {
-        id: 3,
-        title: 'DOING',
-        borderColor: '#00fff3',
-        tasks: []
-      },
-      {
-        id: 4,
-        title: 'CLOSED',
-        borderColor: '#3fff00',
-        tasks: []
-      }
-    ]
-
-    if (this.getTaskLists().length == 0) localStorage.setItem('fakeTaskLists', JSON.stringify(mock));
-
+  updateTaskLists(taskLists: TaskList[]) {
+    localStorage.setItem('fakeTaskLists', JSON.stringify(taskLists));
   }
 
   getTaskLists(): TaskList[] {
@@ -55,7 +28,7 @@ export class FakeApiService {
     taskListToAdd.id = this.getNewTaskListId();
     let taskLists: TaskList[] = this.getTaskLists();
     taskLists.push(taskListToAdd);
-    localStorage.setItem('fakeTaskLists', JSON.stringify(taskLists));
+    this.updateTaskLists(taskLists);
 
     return new Promise((resolve, reject) => {
       resolve(taskListToAdd);
@@ -73,7 +46,7 @@ export class FakeApiService {
 
     if (taskListIndex > 0) newTaskLists.splice(taskListIndex, 0, taskListToUpdate);
     else newTaskLists.unshift(taskListToUpdate);
-    localStorage.setItem('fakeTaskLists', JSON.stringify(newTaskLists));
+    this.updateTaskLists(newTaskLists);
 
     return new Promise((resolve, reject) => {
       resolve(taskListToUpdate);
@@ -83,7 +56,7 @@ export class FakeApiService {
   deleteTaskList(taskListToDelete: TaskList): Promise<TaskList> {
     let taskLists: TaskList[] = this.getTaskLists();
     const newTaskLists = taskLists.filter((taskList: TaskList) => taskList.id != taskListToDelete.id);
-    localStorage.setItem('fakeTaskLists', JSON.stringify(newTaskLists));
+    this.updateTaskLists(newTaskLists);
 
     return new Promise((resolve, reject) => {
       resolve(taskListToDelete);
@@ -107,7 +80,7 @@ export class FakeApiService {
   getTasks(taskListId: number): Task[] {
     const taskList = this.getTaskLists().find((tasklist) => tasklist.id == taskListId);
     if (taskList && taskList.tasks.length > 0) return taskList.tasks;
-    else return [];
+    else return [] as Task[];
   }
 
   addTask(taskToAdd: Task, taskListId: number): Promise<Task> {

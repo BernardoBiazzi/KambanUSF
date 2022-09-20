@@ -10,6 +10,10 @@ export class TaskService {
 
   constructor(private fakeApiService: FakeApiService) { }
 
+  updateTaskLists(taskLists: TaskList[]) {
+    this.fakeApiService.updateTaskLists(taskLists);
+  }
+
   requestTaskLists(): TaskList[] {
     return this.fakeApiService.getTaskLists();
   }

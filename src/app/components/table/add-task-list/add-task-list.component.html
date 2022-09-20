@@ -1,0 +1,43 @@
+<div class="click-to-add" (click)="toggleForm()" *ngIf="!showFormAddTaskList">
+  <p>Criar lista de tarefas</p>
+</div>
+
+<div *ngIf="showFormAddTaskList" class="add-tasklist" [ngStyle]="{'border-top': '7px solid ' + this.taskListForm.value.borderColor}">
+  <form [formGroup]="taskListForm" (ngSubmit)="submit()">
+    <h4 class="title-new-task">{{this.taskListForm.value.title || 'Nova Lista de Tarefas'}}</h4>
+    <input type="text" required class="form-control" id="title" formControlName="title" placeholder="Nova Lista de Tarefas"/>
+    <div class="border-color-selector">
+
+      <input type="text" required class="form-control" id="borderColor" maxlength="7" formControlName="borderColor">
+
+      <div class="selector" (click)="toggleColorSelector()"
+        [ngStyle]="{'background': this.taskListForm.value.borderColor}">
+      </div>
+
+      <div class="float-selector"
+          *ngIf="this.showFloatingColorSelector">
+          <div class="float-color"
+          *ngFor="let color of colors"
+          (click)="selectColor(color)"
+          [ngStyle]="{'background': color}"></div>
+      </div>
+
+    </div>
+    <div class="buttons">
+      <button
+        type="submit"
+        style="color: white"
+        [ngStyle]="{'background': this.taskListForm.value.borderColor}"
+        class="btn">
+        Criar
+      </button>
+      <button
+        (click)="toggleForm()"
+        style="color: white"
+        [ngStyle]="{'background': 'gray'}"
+        class="btn">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>

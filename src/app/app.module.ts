@@ -1,6 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -12,7 +12,8 @@ import { NewTaskComponent } from './components/table/task-list/new-task/new-task
 import { TaskListComponent } from './components/table/task-list/task-list.component';
 import { EditTaskComponent } from './components/table/task-list/task/edit-task/edit-task.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { DragDropModule } from '@angular/cdk/drag-drop'
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { AddTaskListComponent } from './components/table/add-task-list/add-task-list.component'
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop'
     TaskComponent,
     NewTaskComponent,
     EditTaskComponent,
-    TaskListComponent
+    TaskListComponent,
+    AddTaskListComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +32,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop'
     HttpClientModule,
     FormsModule,
     FontAwesomeModule,
-    DragDropModule
+    DragDropModule,
+    ReactiveFormsModule
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [],

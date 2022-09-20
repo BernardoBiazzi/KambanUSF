@@ -25,6 +25,7 @@ export class TableComponent implements OnInit {
 
   drop(event: any) {
     moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    this.taskService.updateTaskLists(this.taskLists);
   }
 
   subscribeToIsDraggable() {
