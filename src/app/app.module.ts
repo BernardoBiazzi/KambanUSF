@@ -13,7 +13,11 @@ import { TaskListComponent } from './components/table/task-list/task-list.compon
 import { EditTaskComponent } from './components/table/task-list/task/edit-task/edit-task.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { AddTaskListComponent } from './components/table/add-task-list/add-task-list.component'
+import { AddTaskListComponent } from './components/table/add-task-list/add-task-list.component';
+import { LoginComponent } from './components/login/login.component'
+
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import { FacebookLoginProvider } from 'angularx-social-login';
 
 @NgModule({
   declarations: [
@@ -24,7 +28,8 @@ import { AddTaskListComponent } from './components/table/add-task-list/add-task-
     NewTaskComponent,
     EditTaskComponent,
     TaskListComponent,
-    AddTaskListComponent
+    AddTaskListComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -33,10 +38,27 @@ import { AddTaskListComponent } from './components/table/add-task-list/add-task-
     FormsModule,
     FontAwesomeModule,
     DragDropModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SocialLoginModule
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
-  providers: [],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('884913669550863')
+          }
+        ],
+        onError: (err) => {
+          console.error(err);
+        }
+      } as SocialAuthServiceConfig,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
