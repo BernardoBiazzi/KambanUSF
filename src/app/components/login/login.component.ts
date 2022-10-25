@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SocialAuthService, SocialUser } from 'angularx-social-login';
-import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
+import { FacebookLoginProvider } from "angularx-social-login";
 
 @Component({
   selector: 'app-login',
@@ -10,7 +10,7 @@ import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-logi
 })
 export class LoginComponent implements OnInit {
 
-  public picture: string = 'https://www.businessnetworks.com/sites/default/files/default_images/default-avatar.png';
+  public picture: string = '';
   public socialUser!: any;
 
   constructor(private authService: SocialAuthService,
@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
 
   setPictureUrl(): void {
     if (this.socialUser) this.picture = this.socialUser.response.picture.data.url;
-    else this.picture = 'https://www.businessnetworks.com/sites/default/files/default_images/default-avatar.png';
+    else this.picture = 'https://cdn-icons-png.flaticon.com/512/147/147133.png';
   }
 
   loginComFacebook(): void {

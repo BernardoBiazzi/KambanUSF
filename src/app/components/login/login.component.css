@@ -1,12 +1,21 @@
 .login-area {
   width: 100%;
   height: 100%;
-  background-color: rgb(239 239 239);
+  background: #f3efe8;
   position: fixed;
   top: 0;
   z-index: 9999999;
   display: flex;
   align-items: center;
+}
+
+@media screen and (max-width: 768px) {
+  .login-block {
+    width: 100% !important;
+    height: 100% !important;
+    margin-bottom: 0 !important;
+    border-radius: 0 !important;
+  }
 }
 
 .login-block {
@@ -26,6 +35,12 @@
   padding: 40px;
 }
 
+@media screen and (max-width: 768px) {
+  button {
+    font-size: 18px !important;
+  }
+}
+
 button {
   width: -webkit-fill-available;
   margin-top: 15px;
@@ -33,20 +48,21 @@ button {
   border: none;
   border-radius: 50px;
   color: white;
-  font-weight: 600;
+  font-weight: 400;
   font-size: 20px;
   position: relative;
 }
 
 button:hover {
-  box-shadow: 0px 2px 2px 1px #00000048;
+  filter: brightness(0.95);
 }
 
 #facebook {
   background-color: #0044ff;
 }
 
-#google {
+#google,
+#singOut {
   color: #484848;
   background-color: #ffffff;
   border: solid 1px #3e3e3e;
@@ -61,34 +77,29 @@ button:hover {
   top: 10px;
 }
 
-#singOut {
-  background-color: #000000b5;
-}
-
 #skip-to-table {
   background-color: #0044ff;
 }
 
 #avatar-picture {
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
   background-color: black;
-  margin-bottom: 15px;
+  margin-bottom: 25px;
   border-radius: 50%;
   overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: solid 6px #0044ff;
-  box-shadow: 0px 0px 0px 5px #2c2c2c;
+  box-shadow: 0px 0px 0px 2px #303030;
 }
 
 img {
-  width: 115%;
   height: 115%;
 }
 
 .blur {
+  height: 100% !important;
   filter: blur(3px);
 }
 
@@ -96,6 +107,8 @@ span {
   font-size: 25px;
   font-weight: bold;
   color: #3e3e3e;
+  line-height: 20px;
+  margin-top: 15px;
 }
 
 p {
