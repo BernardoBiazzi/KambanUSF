@@ -1,8 +1,8 @@
 {
   "name": "KambanUSF",
   "short_name": "KambanUSF",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
