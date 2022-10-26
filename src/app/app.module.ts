@@ -18,6 +18,8 @@ import { LoginComponent } from './components/login/login.component'
 
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import { FacebookLoginProvider } from 'angularx-social-login';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,13 @@ import { FacebookLoginProvider } from 'angularx-social-login';
     FontAwesomeModule,
     DragDropModule,
     ReactiveFormsModule,
-    SocialLoginModule
+    SocialLoginModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   providers: [
