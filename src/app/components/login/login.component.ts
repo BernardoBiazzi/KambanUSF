@@ -35,8 +35,13 @@ export class LoginComponent implements OnInit {
   }
 
   setPictureUrl(): void {
-    if (this.socialUser) this.picture = this.socialUser.response.picture.data.url;
+    if (this.socialUser) this.picture = this.getHigherResPicture(this.socialUser.response.picture.data.url);
     else this.picture = 'https://cdn-icons-png.flaticon.com/512/147/147133.png';
+  }
+
+  getHigherResPicture(url: string): string {
+    const idPicture = url.split('asid=')[1].split('&height')[0];
+    return `http://graph.facebook.com/${idPicture}/picture?type=large`
   }
 
   loginComFacebook(): void {

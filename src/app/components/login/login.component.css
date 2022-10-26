@@ -100,7 +100,6 @@ img {
 
 .blur {
   height: 100% !important;
-  filter: blur(3px);
 }
 
 span {
