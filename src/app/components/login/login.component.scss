@@ -1,0 +1,107 @@
+.login-area {
+  width: 100%;
+  height: 100%;
+  background: var(--primary-background);
+  position: fixed;
+  top: 0;
+  z-index: 9999999;
+  display: flex;
+  align-items: center;
+
+  .login-block {
+    width: 90%;
+    max-width: 500px;
+    min-height: 500px;
+    margin-left: auto;
+    margin-bottom: 100px;
+    display: flex;
+    margin-right: auto;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--card-background);
+    box-shadow: var(--card-box-shadow);
+    border-radius: 25px;
+    flex-flow: column;
+    padding: 40px;
+
+    @media screen and (max-width: 768px) {
+      width: 100% !important;
+      height: 100% !important;
+      margin-bottom: 0 !important;
+      border-radius: 0 !important;
+    }
+
+    #avatar-picture {
+      width: 180px;
+      height: 180px;
+      background-color: var(--card-background);
+      margin-bottom: 25px;
+      border-radius: 50%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: var(--border-avatar-picture);
+
+      img {
+        height: 115%;
+      }
+    }
+
+    span {
+      font-size: 25px;
+      font-weight: bold;
+      color: var(--title-color);
+      line-height: 20px;
+      margin-top: 15px;
+    }
+
+    p {
+      margin-bottom: 5px;
+      font-size: 18px;
+      color: var(--text-color);
+    }
+
+    button {
+      width: -webkit-fill-available;
+      margin-top: 15px;
+      padding: 10px;
+      border: none;
+      border-radius: 50px;
+      color: white;
+      font-weight: 400;
+      font-size: 20px;
+      position: relative;
+
+      @media screen and (max-width: 768px) {
+        font-size: 18px !important;
+      }
+
+      &:hover {
+        filter: brightness(0.95);
+      }
+
+      img {
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        left: 10px;
+        top: 10px;
+      }
+    }
+
+    #facebook,
+    #skip-to-table {
+      background-color: #0044ff;
+      border: solid 1px #0044ff;
+    }
+
+    #google,
+    #singOut {
+      color: #484848;
+      background-color: white;
+      border: var(--border-social-login);
+    }
+
+  }
+}
