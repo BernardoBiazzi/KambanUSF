@@ -20,6 +20,10 @@ export class TaskListComponent implements OnInit {
   constructor(private taskService: TaskService,
     private dragdropService: DragdropService) { }
 
+  get cdkDragStartDelay() {
+    return window.innerWidth < 768 ? 100 : 0;
+  }
+
   ngOnInit() {
     this.borderTop = `${this.taskList.borderColor} 7px solid`;
     this.subscribeToIsDraggable();

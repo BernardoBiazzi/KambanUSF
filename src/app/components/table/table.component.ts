@@ -17,6 +17,10 @@ export class TableComponent implements OnInit {
   constructor(private dragdropService: DragdropService,
     private taskService: TaskService) { }
 
+  get cdkDragStartDelay() {
+    return window.innerWidth < 768 ? 100 : 0;
+  }
+
   ngOnInit(): void {
     this.subscribeToIsDraggable();
     this.subscribeToTaskChanges();

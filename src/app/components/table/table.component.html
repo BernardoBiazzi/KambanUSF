@@ -9,7 +9,7 @@
     <app-task-list *ngFor="let taskList of taskLists" [taskList]="taskList"
       cdkDrag
       [cdkDragData]="taskList"
-      [cdkDragStartDelay]="100"
+      [cdkDragStartDelay]="cdkDragStartDelay"
       [cdkDragDisabled]="!isDraggable">
     </app-task-list>
 
