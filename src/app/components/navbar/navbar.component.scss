@@ -1,14 +1,50 @@
-.link-active {
-  font-weight: bolder;
-  max-height: 70px;
-}
-
 .navbar {
   z-index: 9999999;
-  background-color: white !important;
-  box-shadow: 0px 0px 10px 0px #00000052;
+  background-color: var(--card-background) !important;
+  box-shadow: var(--card-box-shadow);
+  position: relative;
+
+  .navbar-brand {
+    color: var(--title-color);
+  }
+
+  .navbar-toggler {
+    margin-right: 10px;
+  }
+
+  .link-active {
+    font-weight: bolder;
+    max-height: 70px;
+  }
+
+  .profile {
+    display: inline-flex;
+    height: 50px;
+    margin-right: 20px;
+    align-items: center;
+
+    p {
+      margin-bottom: 0;
+      font-size: 18px;
+      color: var(--title-color);
+
+      @media screen and (max-width: 768px){
+        display: none;
+      }
+    }
+
+    img {
+      width: auto;
+      height: 90%;
+      margin-left: 20px;
+      border-radius: 50%;
+      cursor: pointer;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
 }
 
-.navbar-toggler {
-  margin-right: 10px;
-}
+

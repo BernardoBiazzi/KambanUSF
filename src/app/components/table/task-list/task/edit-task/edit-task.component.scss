@@ -1,6 +1,6 @@
 .bgEditTask {
-  background-color: rgb(230 230 230 / 50%);
-  box-shadow: 0px 0px 2px 0px #0000004f;
+  background-color: var(--card-background);
+  box-shadow: var(--card-box-shadow);
   border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -11,20 +11,20 @@
   margin-right: 0px;
   padding-top: 2px;
   padding-bottom: 2px;
-}
 
-.formBtns {
-  width: 100%;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: space-between;
-}
+  .formBtns {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+  }
 
-.btn-primary {
-  width: 49%;
-}
+  .btn-primary {
+    width: 49%;
+  }
 
-.btn-secondary {
-  width: 49%;
+  .btn-secondary {
+    width: 49%;
+  }
 }

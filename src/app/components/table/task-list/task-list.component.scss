@@ -1,11 +1,11 @@
 .taskList {
-  background-color: white;
+  background-color: var(--card-background);
   border-radius: 10px;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
-  box-shadow: 0px 0px 10px 0px #0000004f;
+  box-shadow: var(--card-box-shadow);
   width: 310px;
   max-width: 92%;
   cursor: pointer;
@@ -16,41 +16,60 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-}
 
-.taskList:hover button {
-  display: block;
-}
+  h4 {
+    color: var(--title-color);
+  }
 
-.tasksContainer {
-  max-height: 60vh;
-  padding-bottom: 10px;
-  overflow-y: scroll;
-  min-height: 80.5px;
-  background: #233337;
-  margin-right: 0px;
-  margin-left: 0px;
-  border-radius: 5px;
-  margin-top: 15px;
-}
+  &:hover button {
+    display: block;
+  }
 
-/* SCROLL BAR SETTINGS */
+  button {
+    border: none;
+    background: transparent;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 22px;
+    color: var(--icon-color);
+    display: none;
 
-.tasksContainer::-webkit-scrollbar {
-  width: 4px;
-}
+    &:hover {
+      color: var(--icon-color-hover);
+    }
+  }
 
-.tasksContainer::-webkit-scrollbar-track {
-  background: transparent;
-}
+  .tasksContainer {
+    max-height: 60vh;
+    padding-bottom: 10px;
+    overflow-y: scroll;
+    min-height: 80.5px;
+    background: var(--primary-background);
+    margin-right: 0px;
+    margin-left: 0px;
+    border-radius: 5px;
+    margin-top: 15px;
 
-.tasksContainer::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.226);
-  border-radius: 30px;
-  -webkit-border-radius: 30px;
-  -moz-border-radius: 30px;
-  -ms-border-radius: 30px;
-  -o-border-radius: 30px;
+    /* SCROLL BAR SETTINGS */
+
+    &::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, 0.226);
+      border-radius: 30px;
+      -webkit-border-radius: 30px;
+      -moz-border-radius: 30px;
+      -ms-border-radius: 30px;
+      -o-border-radius: 30px;
+    }
+  }
 }
 
 /* CDK DRAG&DROP ANIMATIONS */
@@ -73,19 +92,4 @@
 
 .cdk-drag-placeholder {
   opacity: 0.4;
-}
-
-button {
-  border: none;
-  background: transparent;
-  position: absolute;
-  top: 15px;
-  right: 15px;
-  font-size: 22px;
-  color: lightgray;
-  display: none;
-}
-
-button:hover {
-  color: gray;
 }

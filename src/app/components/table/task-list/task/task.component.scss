@@ -1,6 +1,6 @@
 .bgTask {
-  background-color: rgb(243 243 243 / 90%);
-  box-shadow: 0px 0px 2px 0px #0000004f;
+  background-color: var(--card-background);
+  box-shadow: var(--card-box-shadow);
   border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -14,76 +14,79 @@
   position: relative;
   overflow: hidden;
   cursor: pointer;
-}
 
-.bgTask:hover {
-  background-color: rgb(243, 243, 243);
-}
+  &:hover {
+    opacity: 0.9;
 
-p {
-  margin: 0px;
-}
+    .deleteTaskButton {
+      display: block;
+    }
 
-.title {
-  font-size: 17px;
-}
+    .editTaskButton {
+      display: block;
+    }
+  }
 
-.descricao {
-  color: gray;
-}
+  p {
+    margin: 0px;
+  }
 
-.bgTask:hover .deleteTaskButton {
-  display: block;
-}
+  .title {
+    font-size: 17px;
+    color: var(--title-color);
+    font-weight: 500;
+  }
 
-.deleteTaskButton {
-  display: none;
-  position: absolute;
-  width: auto;
-  right: 10px;
-  transform: translateY(50%);
-  bottom: 50%;
-  background-color: transparent;
-  padding: 0;
-  font-size: 22px;
-  color: #b6b6b6;;
-  font-weight: bold;
-  border: none;
-}
+  .descricao {
+    color: var(--text-color);
+  }
 
-.deleteTaskButton:hover {
-  color: #808080;;
-}
-
-.bgTask:hover .editTaskButton {
-  display: block;
-}
-
-.editTaskButton {
-  display: none;
-  position: absolute;
-  width: auto;
-  right: 40px;
-  transform: translateY(50%);
-  bottom: 50%;
-  background-color: transparent;
-  padding: 0;
-  font-size: 25px;
-  color: #b6b6b6;;
-  font-weight: bold;
-  border: none;
-}
-
-.editTaskButton:hover {
-  color: #808080;;
-}
-
-@media only screen and (max-width: 768px) {
   .deleteTaskButton {
-    display: block;
+    display: none;
+    position: absolute;
+    width: auto;
+    right: 10px;
+    transform: translateY(50%);
+    bottom: 50%;
+    background-color: transparent;
+    padding: 0;
+    font-size: 22px;
+    color: var(--icon-color);
+    font-weight: bold;
+    border: none;
+
+    &:hover {
+      color: var(--icon-color-hover);
+    }
+
+    @media only screen and (max-width: 768px) {
+      display: block;
+    }
   }
+
   .editTaskButton {
-    display: block;
+    display: none;
+    position: absolute;
+    width: auto;
+    right: 40px;
+    transform: translateY(50%);
+    bottom: 50%;
+    background-color: transparent;
+    padding: 0;
+    font-size: 25px;
+    color: var(--icon-color);
+    font-weight: bold;
+    border: none;
+
+    &:hover {
+      color: var(--icon-color-hover);
+    }
+
+    @media only screen and (max-width: 768px) {
+      display: block;
+    }
   }
 }
+
+
 

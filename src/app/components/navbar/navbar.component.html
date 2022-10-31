@@ -10,4 +10,10 @@
       </li>
     </ul>
   </div>
+
+  <div class="profile">
+    <p>{{user?.name}}</p>
+    <img [src]="this.profilePicture" (click)="goToUserProfile()">
+  </div>
+
 </nav>

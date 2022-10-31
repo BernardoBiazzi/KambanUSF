@@ -1,27 +1,31 @@
 .bg-table {
   height: calc(100vh - 56px);
+
+  .table-area {
+    background-color: var(--primary-background);
+    flex-flow: row;
+    overflow-x: auto;
+    height: 100%;
+
+    /* SCROLL BAR SETTINGS */
+
+    /* &::-webkit-scrollbar {
+      display: none;
+    } */
+
+    /* CDK DRAG&DROP ANIMATIONS */
+
+    app-task-list {
+      margin: 0px !important;
+      padding: 0px !important;
+      width: auto !important;
+    }
+
+    app-add-task-list {
+      width: auto !important;
+    }
+  }
 }
-
-.table-area {
-  background-color: #233337;
-  flex-flow: row;
-  overflow-x: auto;
-  height: 100%;
-}
-
-app-task-list {
-  margin: 0px !important;
-  padding: 0px !important;
-  width: auto !important;
-}
-
-/* SCROLL BAR SETTINGS */
-
-/* .table-area::-webkit-scrollbar {
-  display: none;
-} */
-
-/* CDK DRAG&DROP ANIMATIONS */
 
 .cdk-drag {
   transition: transform 100ms cubic-bezier(0, 0, 0.4, 1);
@@ -41,8 +45,4 @@ app-task-list {
 
 .cdk-drag-placeholder {
   opacity: 0.4;
-}
-
-app-add-task-list {
-  width: auto !important;
 }
