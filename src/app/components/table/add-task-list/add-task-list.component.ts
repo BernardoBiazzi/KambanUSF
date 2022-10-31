@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { TaskList } from 'src/app/models/taskList.model';
-import { TaskService } from 'src/app/services/task-service';
+import { TaskService } from 'src/app/services/task.service';
 
 @Component({
   selector: 'app-add-task-list',

@@ -1,8 +1,6 @@
 import { EventEmitter, Injectable } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class DragdropService {
 
   isDraggable: EventEmitter<any> = new EventEmitter();

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SocialAuthService, SocialUser } from 'angularx-social-login';
-import { FacebookLoginProvider } from "angularx-social-login";
+import { SocialUser } from 'angularx-social-login';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -10,74 +10,42 @@ import { FacebookLoginProvider } from "angularx-social-login";
 })
 export class LoginComponent implements OnInit {
 
-  public picture: string = '';
-  public socialUser!: any;
+  public profilePicture: string = '';
+  public user: SocialUser | undefined;
 
-  constructor(private authService: SocialAuthService,
+  constructor(private authService: AuthService,
     private router: Router) { }
 
   ngOnInit() {
-    this.socialUser = this.getAccess();
-    this.setPictureUrl();
-    this.subscribeToAuthState();
+    this.setUserAndPicture();
+    this.subscribeToAuthStateChanged();
   }
 
-  subscribeToAuthState(): void {
-    this.authService.authState.subscribe((socialUser: SocialUser) => {
-      if (socialUser) {
-        this.socialUser = socialUser;
-        this.setAccess(socialUser);
-        this.setPictureUrl();
-      } else {
-        this.removeAccess();
-      }
-    });
+  singInWithFacebook() {
+    this.authService.singInWithFacebook();
   }
 
-  setPictureUrl(): void {
-    if (this.socialUser) this.picture = this.getHigherResPicture(this.socialUser.response.picture.data.url);
-    else this.picture = 'https://cdn-icons-png.flaticon.com/512/147/147133.png';
+  singInWithGoogle() {
+    this.authService.singInWithGoogle();
   }
 
-  getHigherResPicture(url: string): string {
-    const idPicture = url.split('asid=')[1].split('&height')[0];
-    return `http://graph.facebook.com/${idPicture}/picture?type=large`
+  singOut() {
+    this.authService.singOut();
   }
 
-  loginComFacebook(): void {
-    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID).catch((error) => {
-      console.log(error);
-    });
-  }
-
-  loginComGoogle(): void {
-    alert('Login com Google temporáriamente indisponível');
-  }
-
-  singOut(): void {
-    this.authService.signOut().catch(() => {
-      this.removeAccess();
-    });
-  }
-
-  removeAccess(): void {
-    this.setAccess(undefined);
-    this.socialUser = undefined;
-    this.setPictureUrl();
-  }
-
-  goToWorkspace(): void {
+  goToWorkspace() {
     this.router.navigate(['/table']);
   }
 
-  getAccess() {
-    const access = localStorage.getItem('access');
-    if (access != undefined) return JSON.parse(access) as SocialUser;
-    return undefined;
+  private subscribeToAuthStateChanged() {
+    this.authService.authStateChanged.subscribe(() => {
+      this.setUserAndPicture();
+    });
   }
 
-  setAccess(access?: SocialUser) {
-    if (access == undefined) return localStorage.removeItem('access');
-    localStorage.setItem('access', JSON.stringify(access));
+  private setUserAndPicture() {
+    this.user = this.authService.user;
+    this.profilePicture = this.authService.profilePicture;
   }
+
 }

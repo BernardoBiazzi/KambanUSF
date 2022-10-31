@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Task } from 'src/app/models/task.model';
 import { DragdropService } from 'src/app/services/dragdrop.service';
-import { TaskService } from '../../../../services/task-service';
+import { TaskService } from '../../../../services/task.service';
 
 @Component({
   selector: 'app-new-task',

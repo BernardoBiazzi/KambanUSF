@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Task } from '../../../../models/task.model';
-import { TaskService } from '../../../../services/task-service';
+import { TaskService } from '../../../../services/task.service';
 import { faCircleCheck, faCircleDot, faCircleXmark, faPenSquare } from '@fortawesome/free-solid-svg-icons';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { DragdropService } from '../../../../services/dragdrop.service';

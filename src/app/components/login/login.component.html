@@ -3,24 +3,24 @@
   <div class="login-block">
 
     <div id="avatar-picture">
-      <img [class.blur]="socialUser" src="{{this.picture}}" alt="">
+      <img [class.blur]="user" src="{{this.profilePicture}}" alt="">
     </div>
 
-    <span *ngIf="!socialUser">Bem vindo</span>
-    <p *ngIf="!socialUser">Efetue o seu login abaixo:</p>
-    <button *ngIf="!socialUser" id="facebook" (click)="loginComFacebook()">
+    <span *ngIf="!user">Bem vindo</span>
+    <p *ngIf="!user">Efetue o seu login abaixo:</p>
+    <button *ngIf="!user" id="facebook" (click)="singInWithFacebook()">
       <img src="https://tighestimepieces.com/wp-content/uploads/2016/11/Facebook-icon-WHITE-300x300.png">
       Entre com Facebook
     </button>
-    <button *ngIf="!socialUser" id="google" (click)="loginComGoogle()">
+    <button *ngIf="!user" id="google" (click)="singInWithGoogle()">
       <img src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png">
       Entre com Google
     </button>
 
-    <span *ngIf="socialUser">{{socialUser.name}}</span>
-    <p *ngIf="socialUser">{{socialUser.email}}</p>
-    <button *ngIf="socialUser" id="skip-to-table" (click)="goToWorkspace()">Workspace</button>
-    <button *ngIf="socialUser" id="singOut" (click)="singOut()">Sair</button>
+    <span *ngIf="user">{{user.name}}</span>
+    <p *ngIf="user">{{user.email}}</p>
+    <button *ngIf="user" id="skip-to-table" (click)="goToWorkspace()">Workspace</button>
+    <button *ngIf="user" id="singOut" (click)="singOut()">Sair</button>
 
   </div>
 

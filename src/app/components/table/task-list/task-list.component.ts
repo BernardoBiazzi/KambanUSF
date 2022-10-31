@@ -1,6 +1,6 @@
 import { TaskList } from '../../../models/taskList.model';
 import { DragdropService } from '../../../services/dragdrop.service';
-import { TaskService } from '../../../services/task-service';
+import { TaskService } from '../../../services/task.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';

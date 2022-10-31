@@ -1,7 +1,7 @@
 import { moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { TaskList } from 'src/app/models/taskList.model';
-import { TaskService } from 'src/app/services/task-service';
+import { TaskService } from 'src/app/services/task.service';
 import { DragdropService } from '../../services/dragdrop.service';
 
 @Component({
