@@ -4,8 +4,25 @@
   box-shadow: var(--card-box-shadow);
   position: relative;
 
+  fa-icon {
+    font-size: 25px;
+    margin-right: 20px;
+    color: var(--title-color);
+
+    @media screen and (min-width: 768px){
+      margin-left: 10px;
+    }
+  }
+
   .navbar-brand {
     color: var(--title-color);
+    align-items: center;
+    display: flex;
+
+    @media screen and (max-width: 768px){
+      padding-bottom: 0px;
+      padding-top: 0px;
+    }
   }
 
   .navbar-toggler {
@@ -19,9 +36,13 @@
 
   .profile {
     display: inline-flex;
-    height: 50px;
+    height: 40px;
     margin-right: 20px;
     align-items: center;
+
+    @media screen and (max-width: 768px){
+      margin-right: 15px;
+    }
 
     p {
       margin-bottom: 0;
@@ -36,7 +57,7 @@
     img {
       width: auto;
       height: 90%;
-      margin-left: 20px;
+      margin-left: 10px;
       border-radius: 50%;
       cursor: pointer;
 
