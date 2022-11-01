@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1667266641464,
+  "timestamp": 1667273792958,
   "index": "https://bernardobiazzi.github.io/KambanUSF/index.html",
   "assetGroups": [
     {
@@ -13,7 +13,7 @@
       "urls": [
         "https://bernardobiazzi.github.io/KambanUSF/favicon.ico",
         "https://bernardobiazzi.github.io/KambanUSF/index.html",
-        "https://bernardobiazzi.github.io/KambanUSF/main.a11e835fa2efc0da.js",
+        "https://bernardobiazzi.github.io/KambanUSF/main.023432a2f2da7169.js",
         "https://bernardobiazzi.github.io/KambanUSF/manifest.webmanifest",
         "https://bernardobiazzi.github.io/KambanUSF/polyfills.2992ce27b7475c78.js",
         "https://bernardobiazzi.github.io/KambanUSF/runtime.f6fb7a9231118046.js",
@@ -54,8 +54,8 @@
     "https://bernardobiazzi.github.io/KambanUSF/assets/icons/icon-96x96.png": "357b7ea93aef0528182782cb28ae42f1777fb0c2",
     "https://bernardobiazzi.github.io/KambanUSF/assets/icons/mediacreationtool.exe": "d5cf9db53dbc68bb2862585efab0b11ae4fc716f",
     "https://bernardobiazzi.github.io/KambanUSF/favicon.ico": "19d5f559f44890a9f0cbb324c3a9cf783a4006ea",
-    "https://bernardobiazzi.github.io/KambanUSF/index.html": "956ed59e3d8c58126133731b0a15b7fad6af33df",
-    "https://bernardobiazzi.github.io/KambanUSF/main.a11e835fa2efc0da.js": "9385e9c33d05ccd967e9d763b04ea0507bfd140f",
+    "https://bernardobiazzi.github.io/KambanUSF/index.html": "81f8f1f4a915e35f03ba6bfd456581d04ff885ee",
+    "https://bernardobiazzi.github.io/KambanUSF/main.023432a2f2da7169.js": "8f346f71c694b6a05f0f98026780121efadc23b6",
     "https://bernardobiazzi.github.io/KambanUSF/manifest.webmanifest": "3b31f6a4c470979e377ecb46d4148fbfe1261f08",
     "https://bernardobiazzi.github.io/KambanUSF/polyfills.2992ce27b7475c78.js": "129fea4b0204054b795c0ed7a06eaab838709b6a",
     "https://bernardobiazzi.github.io/KambanUSF/runtime.f6fb7a9231118046.js": "41ec03f8ad6d6e9f14a034040e6ed2aee2ffde7f",
