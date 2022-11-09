@@ -1,8 +1,10 @@
 import { moveItemInArray } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { TaskList } from 'src/app/models/taskList.model';
 import { TaskService } from 'src/app/services/task.service';
 import { DragdropService } from '../../services/dragdrop.service';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-table',
@@ -15,7 +17,8 @@ export class TableComponent implements OnInit {
   taskLists: TaskList[] = [];
 
   constructor(private dragdropService: DragdropService,
-    private taskService: TaskService) { }
+    private taskService: TaskService,
+    private router: Router) { }
 
   get cdkDragStartDelay() {
     return window.innerWidth < 768 ? 100 : 0;
@@ -24,6 +27,7 @@ export class TableComponent implements OnInit {
   ngOnInit(): void {
     this.subscribeToIsDraggable();
     this.subscribeToTaskChanges();
+    this.subscribeToRouterEvents();
     this.taskLists = this.taskService.requestTaskLists();
   }
 
@@ -42,6 +46,12 @@ export class TableComponent implements OnInit {
     this.taskService.tasksChanges.subscribe(() => {
       this.taskLists = this.taskService.requestTaskLists();
     })
+  }
+
+  subscribeToRouterEvents() {
+    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
+      this.taskLists = this.taskService.requestTaskLists();
+    });
   }
 
 }

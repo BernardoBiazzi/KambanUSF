@@ -4,7 +4,7 @@ import { LoginComponent } from './components/login/login.component';
 import { TableComponent } from './components/table/table.component';
 
 const routes: Routes = [
-  { path: 'table/:id', component: TableComponent },
+  { path: 'table/:tableid', component: TableComponent },
   { path: 'login', component: LoginComponent }
 ];
 

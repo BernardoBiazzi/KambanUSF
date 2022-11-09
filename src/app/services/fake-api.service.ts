@@ -7,12 +7,16 @@ export class FakeApiService {
 
   constructor() { }
 
+  get tableId() {
+    return location.pathname.split('table/')[1];
+  }
+
   updateTaskLists(taskLists: TaskList[]) {
-    localStorage.setItem('fakeTaskLists', JSON.stringify(taskLists));
+    localStorage.setItem(`TaskLists-${this.tableId}`, JSON.stringify(taskLists));
   }
 
   getTaskLists(): TaskList[] {
-    const taskListsStringify = localStorage.getItem('fakeTaskLists') || '{}';
+    const taskListsStringify = localStorage.getItem(`TaskLists-${this.tableId}`) || '{}';
     const taskLists: TaskList[] = JSON.parse(taskListsStringify);
     if (taskLists.length > 0) return taskLists;
     else return [];
