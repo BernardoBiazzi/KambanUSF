@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
   }
 
   goToWorkspace() {
-    this.router.navigate(['/table']);
+    this.router.navigate(['/table/1']);
   }
 
   private subscribeToAuthStateChanged() {

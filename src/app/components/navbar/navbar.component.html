@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand px-3">
-    <fa-icon [icon]="faTrashAlt"></fa-icon>Workspace
+    <fa-icon [icon]="faTrashAlt" (click)="toogleLeftBar()"></fa-icon>Workspace
   </a>
   <button class="navbar-toggler d-none" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -17,5 +17,22 @@
     <p>Olá, {{user?.firstName}}</p>
     <img [src]="this.profilePicture" (click)="goToUserProfile()">
   </div>
-
 </nav>
+
+<div id="left-bar" class="hide-left-bar">
+  <div class="table-link" [routerLink]="'table/1'" (click)="toogleLeftBar()">
+    <p>Tabela 1</p>
+  </div>
+  <div class="table-link" [routerLink]="'table/2'" (click)="toogleLeftBar()">
+    <p>Tabela 2</p>
+  </div>
+  <div class="table-link" [routerLink]="'table/3'" (click)="toogleLeftBar()">
+    <p>Tabela 3</p>
+  </div>
+  <div class="table-link" [routerLink]="'table/4'" (click)="toogleLeftBar()">
+    <p>Tabela 4</p>
+  </div>
+  <div class="new-table" [routerLink]="'table/4'" (click)="toogleLeftBar()">
+    <p>Criar nova tabela</p>
+  </div>
+</div>

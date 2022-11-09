@@ -38,4 +38,14 @@ export class NavbarComponent implements OnInit {
     });
   }
 
+  toogleLeftBar() {
+    if (document.getElementById('left-bar')?.classList.contains('show-left-bar')) {
+      document.getElementById('left-bar')?.classList.add('hide-left-bar');
+      document.getElementById('left-bar')?.classList.remove('show-left-bar');
+    } else {
+      document.getElementById('left-bar')?.classList.remove('hide-left-bar');
+      document.getElementById('left-bar')?.classList.add('show-left-bar');
+    }
+  }
+
 }

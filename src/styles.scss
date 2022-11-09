@@ -6,6 +6,7 @@ body {
 
 body.light {
   --primary-background: #e0dcd5;
+  --secondary-background: #fafafa;
   --card-background: white;
   --card-box-shadow: 0px 2px 5px 1px #00000013;
   --title-color: #3e3e3e;
@@ -20,6 +21,7 @@ body.light {
 
 body.dark {
   --primary-background: #0e0e0e;
+  --secondary-background: #1d1d1d;
   --card-background: #252525;
   --card-box-shadow: 0px 2px 5px 1px #00000013;
   --title-color: #ececec;
