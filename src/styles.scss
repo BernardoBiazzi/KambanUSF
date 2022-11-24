@@ -17,6 +17,11 @@ body.light {
   --icon-color-hover: #808080;
   --bg-darker-button: rgba(0, 0, 0, 0.05);
   --bg-darker-button-hover: rgba(0, 0, 0, 0.1);
+  --scrollbar-track: rgba(0, 0, 0, 0.05);
+  --scrollbar-thumb: rgba(0, 0, 0, 0.25);
+  --scrollbar-thumb-hover: rgba(0, 0, 0, 0.35);
+
+  background-color: var(--primary-background) !important;
 }
 
 body.dark {
@@ -32,6 +37,11 @@ body.dark {
   --icon-color-hover: #808080;
   --bg-darker-button: rgba(0, 0, 0, 0.3);
   --bg-darker-button-hover: rgba(0, 0, 0, 0.5);
+  --scrollbar-track: rgba(255, 255, 255, 0.05);
+  --scrollbar-thumb: rgba(255, 255, 255, 0.25);
+  --scrollbar-thumb-hover: rgba(255, 255, 255, 0.35);
+
+  background-color: var(--primary-background) !important;
 }
 
 

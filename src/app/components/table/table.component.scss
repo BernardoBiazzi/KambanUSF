@@ -1,5 +1,9 @@
 .bg-table {
-  height: calc(100vh - 56px);
+
+  height: calc(100vh - 63.5px);
+  @media screen and (max-width: 768px) {
+    height: calc(100vh - 56px);
+  }
 
   .table-area {
     background-color: var(--primary-background);
@@ -7,11 +11,34 @@
     overflow-x: auto;
     height: 100%;
 
+    transition: transform 100ms cubic-bezier(0, 0, 0.2, 1);
+    -webkit-transition: transform 100ms cubic-bezier(0, 0, 0.2, 1);
+    -moz-transition: transform 100ms cubic-bezier(0, 0, 0.2, 1);
+    -ms-transition: transform 100ms cubic-bezier(0, 0, 0.2, 1);
+    -o-transition: transform 100ms cubic-bezier(0, 0, 0.2, 1);
+
     /* SCROLL BAR SETTINGS */
 
-    /* &::-webkit-scrollbar {
-      display: none;
-    } */
+    &::-webkit-scrollbar {
+      height: 15px;
+
+      @media screen and (max-width: 768px) {
+        display: none;
+      }
+    }
+
+    &::-webkit-scrollbar-track {
+      background: var(--scrollbar-track);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--scrollbar-thumb);
+      border-radius: 50px;
+
+      &:hover {
+        background: var(--scrollbar-thumb-hover);
+      }
+    }
 
     /* CDK DRAG&DROP ANIMATIONS */
 
