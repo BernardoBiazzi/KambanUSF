@@ -1,7 +1,7 @@
 <nav class="navbar">
 
   <a class="navbar-brand px-3">
-    <fa-icon [icon]="faTrashAlt" (click)="toogleLeftBar()"></fa-icon>
+    <fa-icon [icon]="faBars" (click)="toogleLeftBar()"></fa-icon>
     {{navbarTitle}}
   </a>
 
@@ -20,6 +20,9 @@
     routerLinkActive="active"
     (click)="toogleLeftBar()">
     <p>{{table.name}}</p>
+    <button (click)="deleteTable(table)">
+      <fa-icon [icon]="faTrashAlt"></fa-icon>
+    </button>
   </div>
 
   <div class="new-table" (click)="addNewTable()">

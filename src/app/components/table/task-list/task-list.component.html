@@ -2,8 +2,22 @@
 
   <h4 class="mb-2">{{taskList.title}}</h4>
 
-  <button (click)="deleteThisTaskList()">
+  <button *ngIf="!taskList.info" (click)="deleteThisTaskList()">
     <fa-icon [icon]="faTrashAlt"></fa-icon>
+  </button>
+
+  <button id="info-tooltip" *ngIf="taskList.info">
+    <fa-icon [icon]="faCircleInfo"></fa-icon>
+    <div class="tooltip-tasklist" *ngIf="taskList.info">
+      <div class="img">
+        <img [src]="taskList.info.img" alt="">
+      </div>
+      <div class="text">
+        <p>
+          {{taskList.info.text}}
+        </p>
+      </div>
+    </div>
   </button>
 
   <div class="tasksContainer row" id="{{taskList.id}}"

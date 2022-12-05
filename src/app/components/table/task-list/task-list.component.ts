@@ -3,7 +3,7 @@ import { DragdropService } from '../../../services/dragdrop.service';
 import { TaskService } from '../../../services/task.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faCircleInfo, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-task-list',
@@ -16,6 +16,7 @@ export class TaskListComponent implements OnInit {
   borderTop!: string;
   isDraggable: boolean = true;
   faTrashAlt = faTrashAlt;
+  faCircleInfo = faCircleInfo;
 
   constructor(private taskService: TaskService,
     private dragdropService: DragdropService) { }

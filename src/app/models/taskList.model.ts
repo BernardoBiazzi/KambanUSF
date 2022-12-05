@@ -4,5 +4,11 @@ export interface TaskList {
   id: number,
   title: string,
   borderColor: string,
-  tasks: Task[]
+  tasks: Task[],
+  info?: TaskListInfo
+}
+
+export interface TaskListInfo {
+  img: string,
+  text: string
 }

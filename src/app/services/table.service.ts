@@ -32,11 +32,12 @@ export class TableService {
     return this.requestTables().find((table) => table.id === tableId);
   }
 
-  addNewTable(title: string): void {
+  addNewTable(title: string): number {
     const tables = this.requestTables();
     const newTable = { name: title, id: this.getNewTableId() } as Table;
     tables.push(newTable);
     this.updateTables(tables);
+    return newTable.id;
   }
 
   updateTable(tableToUpdate: Table): void {

@@ -12,6 +12,9 @@ export class AppComponent {
 
   ngOnInit() {
     this.router.navigate(['/login']);
+    if (localStorage.getItem('darkTheme') == 'on') {
+      this.switchTheme();
+    }
   }
 
   get currentTheme(): string {
@@ -34,12 +37,14 @@ export class AppComponent {
       document.body.classList.remove('light');
       document.body.classList.add('dark');
       document.querySelector("meta[name='theme-color']")?.setAttribute('content', '#252525');
+      localStorage.setItem('darkTheme', 'on');
 
     } else {
 
       document.body.classList.add('light');
       document.body.classList.remove('dark');
       document.querySelector("meta[name='theme-color']")?.setAttribute('content', '#ffffff');
+      localStorage.setItem('darkTheme', 'off');
 
     }
 

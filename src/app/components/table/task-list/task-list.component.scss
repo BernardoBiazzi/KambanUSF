@@ -25,6 +25,10 @@
     display: block;
   }
 
+  #info-tooltip {
+    display: block;
+  }
+
   button {
     border: none;
     background: transparent;
@@ -37,6 +41,58 @@
 
     &:hover {
       color: var(--icon-color-hover);
+
+      .tooltip-tasklist {
+        display: block;
+      }
+    }
+
+    .tooltip-tasklist {
+      background: var(--tool-tip-background);
+      box-shadow: var(--card-box-shadow);
+      padding: 15px;
+      border-radius: 8px;
+      position: absolute;
+      z-index: 1;
+      translate: -140px;
+      width: 300px;
+      margin-top: 13px;
+      display: none;
+
+      @media screen and (max-width: 768px) {
+        translate: -260px;
+      }
+
+      &::before {
+        content: "\a";
+        border-style: solid;
+        border-left: 12px solid transparent;
+        border-right: 12px solid transparent;
+        border-bottom: 15px solid var(--tool-tip-background);
+        border-top: transparent;
+        position: absolute;
+        top: -15px;
+        translate: -11px;
+
+        @media screen and (max-width: 768px) {
+          translate: -16px;
+          right: 0;
+        }
+      }
+
+      img {
+        width: 100%;
+        border-radius: 5px;
+      }
+
+      p {
+        color: var(--tool-tip-text);
+        text-align: center;
+        font-size: 15px;
+        line-height: 16px;
+        margin-top: 15px;
+        margin-bottom: 0;
+      }
     }
   }
 

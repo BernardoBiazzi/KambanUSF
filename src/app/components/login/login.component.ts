@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SocialUser } from 'angularx-social-login';
+import { TableService } from 'src/app/services/table.service';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -14,6 +15,7 @@ export class LoginComponent implements OnInit {
   public user: SocialUser | undefined;
 
   constructor(private authService: AuthService,
+    private tableService: TableService,
     private router: Router) { }
 
   ngOnInit() {
@@ -34,7 +36,8 @@ export class LoginComponent implements OnInit {
   }
 
   goToWorkspace() {
-    this.router.navigate(['/table/1']);
+    const table = this.tableService.requestTables()[0];
+    this.router.navigate([`/table/${table.id}`]);
   }
 
   private subscribeToAuthStateChanged() {

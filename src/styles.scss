@@ -20,6 +20,8 @@ body.light {
   --scrollbar-track: rgba(0, 0, 0, 0.05);
   --scrollbar-thumb: rgba(0, 0, 0, 0.25);
   --scrollbar-thumb-hover: rgba(0, 0, 0, 0.35);
+  --tool-tip-background: #242424;
+  --tool-tip-text: #B0B0B0;
 
   background-color: var(--primary-background) !important;
 }
@@ -40,6 +42,8 @@ body.dark {
   --scrollbar-track: rgba(255, 255, 255, 0.05);
   --scrollbar-thumb: rgba(255, 255, 255, 0.25);
   --scrollbar-thumb-hover: rgba(255, 255, 255, 0.35);
+  --tool-tip-background: white;
+  --tool-tip-text: #373737;
 
   background-color: var(--primary-background) !important;
 }
