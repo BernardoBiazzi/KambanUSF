@@ -63,6 +63,10 @@
       padding-left: 35px;
       padding-right: 35px;
       margin-bottom: 15px;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
     }
 
     button {
