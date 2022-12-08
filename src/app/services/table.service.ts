@@ -10,11 +10,7 @@ export class TableService {
 
   @Output() tableChanges: EventEmitter<Table[]> = new EventEmitter();
 
-  constructor() {
-    if (this.requestTables().length == 0) {
-      this.updateTables([{ name: 'Tabela 1', id: 1 }]);
-    }
-  }
+  constructor() { }
 
   updateTables(tables: Table[]) {
     localStorage.setItem(`Tables`, JSON.stringify(tables));
@@ -57,6 +53,7 @@ export class TableService {
   deleteTable(tableToDelete: Table) {
     let tables: Table[] = this.requestTables();
     const newTables = tables.filter((table: Table) => table.id != tableToDelete.id);
+    localStorage.removeItem(`TaskLists-${tableToDelete.id}`);
     this.updateTables(newTables);
   }
 

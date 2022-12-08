@@ -1,0 +1,27 @@
+<div class="new-table-container">
+  <p class="title">Criar novo workspace</p>
+  <div class="line"></div>
+  <p class="witch-metodology">Qual metodologia você deseja seguir?</p>
+
+  <div class="table-options">
+    <button class="kamban" (click)="startWithKamban()">
+      Kamban
+    </button>
+    <button class="lean" (click)="startWithLean()">
+      Lean
+    </button>
+    <button class="scrum" (click)="startWithScrum()">
+      Scrum
+    </button>
+    <button class="others">
+      Outros
+    </button>
+  </div>
+
+  <p class="dont-worry">Não conhece nenhuma? não se preocupe! a gente explica tudo pra você ;)</p>
+  <p class="or">ou</p>
+  <button class="empty-workspace" (click)="startEmpty()">
+    Quero iniciar um workspace em branco
+  </button>
+
+</div>

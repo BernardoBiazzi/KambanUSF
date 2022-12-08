@@ -22,6 +22,7 @@ body.light {
   --scrollbar-thumb-hover: rgba(0, 0, 0, 0.35);
   --tool-tip-background: #242424;
   --tool-tip-text: #B0B0B0;
+  --blue-anchor: #0066FF;
 
   background-color: var(--primary-background) !important;
 }
@@ -44,6 +45,7 @@ body.dark {
   --scrollbar-thumb-hover: rgba(255, 255, 255, 0.35);
   --tool-tip-background: white;
   --tool-tip-text: #373737;
+  --blue-anchor: #00ceff;
 
   background-color: var(--primary-background) !important;
 }

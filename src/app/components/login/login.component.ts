@@ -37,7 +37,8 @@ export class LoginComponent implements OnInit {
 
   goToWorkspace() {
     const table = this.tableService.requestTables()[0];
-    this.router.navigate([`/table/${table.id}`]);
+    if (table == undefined) this.router.navigate([`/new-table`]);
+    else this.router.navigate([`/table/${table.id}`]);
   }
 
   private subscribeToAuthStateChanged() {

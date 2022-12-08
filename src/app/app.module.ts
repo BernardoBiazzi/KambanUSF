@@ -20,6 +20,7 @@ import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-logi
 import { FacebookLoginProvider } from 'angularx-social-login';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { NewTableComponent } from './components/new-table/new-table.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { environment } from '../environments/environment';
     EditTaskComponent,
     TaskListComponent,
     AddTaskListComponent,
-    LoginComponent
+    LoginComponent,
+    NewTableComponent
   ],
   imports: [
     BrowserModule,
